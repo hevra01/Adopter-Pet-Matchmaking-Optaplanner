@@ -1,14 +1,18 @@
 <template>
+  <NavBar/>
   <transition name="moveInUp">
     <router-view/>
   </transition>
 </template>
 
 <script>
-
+import NavBar from "@/components/NavBar";
 
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    NavBar
+  }
 }
 </script>
 
@@ -23,6 +27,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+
 }
 
 .moveInUp-enter-active {

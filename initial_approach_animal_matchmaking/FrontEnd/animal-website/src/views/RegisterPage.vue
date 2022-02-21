@@ -1,7 +1,7 @@
 <template>
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3 overflow-hidden">
+    <div class="container h-100 overflow-hidden">
+      <div class="row d-flex justify-content-center align-items-center h-100 mt-3 overflow-hidden">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card bg-dark text-white" style="border-radius: 15px;">
             <div class="card-body p-5">
