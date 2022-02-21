@@ -1,11 +1,10 @@
 package com.beartell.animalmatchmaking.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ManyToAny;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 /*
@@ -17,37 +16,33 @@ public class Animal {
     @Id
     protected int id;
 
-    @Column(name = "AnimalType", length = 50, nullable = false)
     protected char animalType; // Animal type can either be C for cat or D for dog for the current
                                // implementation
-
-    @Column(name = "Expenses", length = 5, nullable = false)
     protected int expenses; // This will be specified in dollars.
 
-    @Column(name = "Adder", length = 5, nullable = false)
     @ManyToOne
     protected Adder adder;
 
-    @Column(name = "Adopter", length = 5, nullable = true)
     @ManyToOne
     protected Adopter adopter;
 
-    @Column(name = "EmotionalNeed", length = 5, nullable = true)
     protected int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
                                  // care.
-
-    @Column(name = "PhysicalActivityNeed", length = 5, nullable = true)
     protected int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
                                         // activity.
-
-    @Column(name = "ShynessLevel", length = 5, nullable = true)
     protected int shynessLevel; // This will be on a scale of 1 to 10. 10 implying very shy.
+    protected boolean adopted; // This will be true if the animal is adopted and false if it still has not
+                               // been.
+    protected int age;
+    protected boolean alive; // This will be true if the animal is living.
+
+    public Animal() {
+    }
 
     /*
      * The constructor can not initialize the adopter because initially the animal
      * isn't adopted by anyone.
      */
-
     public Animal(char animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
             int shynessLevel) {
         this.animalType = animalType;
@@ -56,6 +51,14 @@ public class Animal {
         this.emotionalNeed = emotionalNeed;
         this.physicalActivityNeed = physicalActivityNeed;
         this.shynessLevel = shynessLevel;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getEmotionalNeed() {
@@ -113,6 +116,30 @@ public class Animal {
 
     public void setAdopter(Adopter adopter) {
         this.adopter = adopter;
+    }
+
+    public boolean isAdopted() {
+        return adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
 }

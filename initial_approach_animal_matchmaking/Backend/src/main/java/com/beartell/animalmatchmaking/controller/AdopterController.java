@@ -2,33 +2,44 @@ package com.beartell.animalmatchmaking.controller;
 
 import java.util.List;
 
+import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.service.AdopterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/adopter")
 public class AdopterController {
 
     @Autowired
     private AdopterService adopterService;
 
-    public ResponseEntity<String> addAdopt(Adopter adopter) {
-        return null;
+    @PostMapping("/add")
+    public void addAdopt(@RequestBody Adopter adopter) {
+        adopterService.addAdopter(adopter);
     }
 
-    public ResponseEntity<List<Adopter>> findAll() {
-        return null;
+    @GetMapping("/all")
+    public List<Adopter> findAll() {
+        return adopterService.findAll();
     }
 
-    public ResponseEntity<Adopter> findAdopt(@RequestParam("username") String username) {
-        return null;
+    @GetMapping("/get")
+    public Adopter findAdopt(@RequestParam("id") long id) {
+        return adopterService.findById(id);
     }
 
-    public ResponseEntity<String> deleteAdopt(@RequestParam("username") String username) {
-        return null;
+    @DeleteMapping("/delete")
+    public boolean deleteAdopt(@RequestParam("id") long id) {
+        return adopterService.deleteAdopter(id);
     }
 }

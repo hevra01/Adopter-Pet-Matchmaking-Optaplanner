@@ -19,6 +19,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 animalTypeConflict(constraintFactory),
                 expenseConstraint(constraintFactory),
                 locationConstraint(constraintFactory),
+                animalPresence(constraintFactory),
+                animalAdoptionStatus(constraintFactory),
 
                 // Soft constraints
                 activenessConstraint(constraintFactory),
@@ -48,28 +50,42 @@ public class AnimalConstraintProvider implements ConstraintProvider {
          */
     }
 
+    private Constraint animalPresence(ConstraintFactory constraintFactory) {
+        // The animal to be matched should be alive.
+        return NULL;
+    }
+
     private Constraint expenseConstraint(ConstraintFactory constraintFactory) {
-        // The animal to be matched should be of the type specified by the user.
+        // The expenses of the animal to be matched should be affordable by the adopter.
+
+        return NULL;
+    }
+
+    private Constraint animalAdoptionStatus(ConstraintFactory constraintFactory) {
+        // The animal to be matched shouldn't be one which is already adopted.
+        // In other words, animal.adopted == false
         return NULL;
     }
 
     private Constraint locationConstraint(ConstraintFactory constraintFactory) {
-        // The animal to be matched should be of the type specified by the user.
+        // The animal to be matched should be in the same country as the adopter.
         return NULL;
     }
 
     private Constraint activenessConstraint(ConstraintFactory constraintFactory) {
-        // The animal to be matched should be of the type specified by the user.
+        // The activeness of the animal should be in similar to its future adopter.
         return NULL;
     }
 
     private Constraint busynessConstraint(ConstraintFactory constraintFactory) {
-        // The animal to be matched should be of the type specified by the user.
+        // The emotional need of the animal should be in accordance to the busyness of
+        // its future adopter.
         return NULL;
     }
 
     private Constraint socializingConstraint(ConstraintFactory constraintFactory) {
-        // The animal to be matched should be of the type specified by the user.
+        // The shyness of the animal should be in accordance to how social its future
+        // adopter is.
         return NULL;
     }
 

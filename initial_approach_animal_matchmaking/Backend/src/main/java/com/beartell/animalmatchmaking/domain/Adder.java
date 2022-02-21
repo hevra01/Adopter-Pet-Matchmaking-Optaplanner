@@ -3,6 +3,7 @@ package com.beartell.animalmatchmaking.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,28 +13,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * database.
  * So that these animals can be adopted by people who want to adopt.
  */
-@Document
+@Entity
 public class Adder extends User {
 
-    private Long id;
-
     @OneToMany(mappedBy = "adder")
-    private List<Animal> animals;
+    private List<Animal> animals = new ArrayList<Animal>();
 
     public Adder() {
-    }
-
-    public Adder(Long id) {
-        this.id = id;
-        animals = new ArrayList<Animal>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public List<Animal> getAnimals() {

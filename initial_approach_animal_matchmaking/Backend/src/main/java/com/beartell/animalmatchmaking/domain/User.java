@@ -3,13 +3,16 @@ package com.beartell.animalmatchmaking.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
-    User is the parent class of Adopter and Adder.  
+    User is the parent class of Adopter and Adder.
  */
-@Document
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id
@@ -32,6 +35,30 @@ public class User {
         this.username = username;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
     }
 
     public String getName() {

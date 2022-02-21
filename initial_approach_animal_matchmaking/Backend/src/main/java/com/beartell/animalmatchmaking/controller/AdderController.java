@@ -8,6 +8,10 @@ import com.beartell.animalmatchmaking.service.AdderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,23 +19,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/adder")
 public class AdderController {
 
-    // the controller needs to be autowired with the service so that it can call its methods.
+    // the controller needs to be autowired with the service so that it can call its
+    // methods.
     @Autowired
     private AdderService adderService;
-    
-    public ResponseEntity<String> addAdder(Adder adder) {
-        return null;
+
+    @PostMapping("/add")
+    public void addAdder(@RequestBody Adder adder) {
+        adderService.saveAdder(adder);
     }
 
-    public ResponseEntity<List<Adder>> findAll() {
-        return null;
+    @GetMapping("/all")
+    public List<Adder> findAll() {
+        return adderService.findAll();
     }
 
-    public ResponseEntity<Adder> findAdopt(@RequestParam("username") String username) {
-        return null;
+    @GetMapping("/get")
+    public Adder findAdder(@RequestParam("id") long id) {
+        return adderService.findAdder(id);
     }
 
-    public ResponseEntity<String> deleteAdopt(@RequestParam("username") String username) {
-        return null;
+    @DeleteMapping("/delete")
+    public boolean deleteAdopt(@RequestParam("id") long id) {
+        return adderService.deleteAdder(id);
     }
 }

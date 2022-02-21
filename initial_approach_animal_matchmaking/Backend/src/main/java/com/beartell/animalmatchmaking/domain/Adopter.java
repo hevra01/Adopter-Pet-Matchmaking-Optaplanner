@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
@@ -16,14 +17,15 @@ import org.springframework.stereotype.Component;
 /**
  * 
  */
-@Document
+@Entity
 @PlanningEntity
 public class Adopter extends User {
 
     @PlanningId
-    private Long id;
+    private Long planningId;
 
     @PlanningVariable(valueRangeProviderRefs = "AnimalList")
+    @Transient
     private Animal myAnimal;
 
     /*
@@ -66,7 +68,7 @@ public class Adopter extends User {
             List<Animal> animals, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
             int physicalActivityTimeDevote, int socialLevel) {
         super(name, surname, username, emailAddress, phoneNumber);
-        this.id = id;
+        this.planningId = id;
         this.animals = animals;
         this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
         this.petType = petType;
@@ -91,12 +93,12 @@ public class Adopter extends User {
         this.petType = petType;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPlanningId() {
+        return planningId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPlanningId(Long planningId) {
+        this.planningId = planningId;
     }
 
     public Animal getMyAnimal() {
