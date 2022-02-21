@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 @Document
 @PlanningEntity
 public class Adopter extends User {
-  
 
     @PlanningId
     private Long id;
@@ -56,10 +55,9 @@ public class Adopter extends User {
     @Column(name = "SocialLevel", length = 3, nullable = false)
     private int socialLevel; // this will be on a scale of 1 to 10. 10 implying very social.
 
-    
     public Adopter() {
     }
-    
+
     /*
      * Initially, we can only initialize the id because the user has not adopted a
      * pet yet.
@@ -107,6 +105,38 @@ public class Adopter extends User {
 
     public void setMyAnimal(Animal myAnimal) {
         this.myAnimal = myAnimal;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
+    }
+
+    public int getBusyness() {
+        return busyness;
+    }
+
+    public void setBusyness(int busyness) {
+        this.busyness = busyness;
+    }
+
+    public int getPhysicalActivityTimeDevote() {
+        return physicalActivityTimeDevote;
+    }
+
+    public void setPhysicalActivityTimeDevote(int physicalActivityTimeDevote) {
+        this.physicalActivityTimeDevote = physicalActivityTimeDevote;
+    }
+
+    public int getSocialLevel() {
+        return socialLevel;
+    }
+
+    public void setSocialLevel(int socialLevel) {
+        this.socialLevel = socialLevel;
     }
 
 }

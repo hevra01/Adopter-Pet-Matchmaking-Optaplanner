@@ -1,5 +1,5 @@
 package com.beartell.animalmatchmaking.repository;
 
-public Interface AdderRepository {
-    
+public interface AdderRepository {
+
 }
