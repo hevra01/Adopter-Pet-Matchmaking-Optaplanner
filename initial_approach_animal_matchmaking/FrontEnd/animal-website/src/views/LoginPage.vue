@@ -1,24 +1,42 @@
 <template>
-  <div class="container">
-    <h1 class="greet">Welcome!</h1>
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input id="exampleInputEmail1" aria-describedby="emailHelp" class="form-control" placeholder="Enter email"
-               type="email">
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+                <div class="form-outline form-white mb-4">
+                  <input id="typeEmailX" class="form-control form-control-lg" type="email"/>
+                  <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                  <input id="typePasswordX" class="form-control form-control-lg" type="password"/>
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+
+              </div>
+
+              <div>
+                <p class="mb-0">Don't have an account?
+                  <router-link class="text-white-50 fw-bold" to="/register">Sign Up</router-link>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input id="exampleInputPassword1" class="form-control" placeholder="Password" type="password">
-      </div>
-      <div class="text-center mt-4">
-        <button class="btn-lg btn-primary " type="submit">Submit</button>
-      </div>
-    </form>
-    <div class="text-center mt-4"><a href="/register">
-      <button class="btn-lg btn-secondary " type="submit">New User?</button>
-    </a></div>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -28,22 +46,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btn-primary {
-  background-color: #DA88DC;
-}
 
-.btn-secondary {
-  background-color: #68B7F0;
-  margin-top: 2em;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.greet {
-  margin-bottom: 2em;
-}
 </style>
