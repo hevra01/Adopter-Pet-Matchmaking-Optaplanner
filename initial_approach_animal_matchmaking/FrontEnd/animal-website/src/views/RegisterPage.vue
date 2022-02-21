@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="button">Register
+                  <button class="btn btn-outline-light btn-lg px-5" type="button">Register
                   </button>
                 </div>
 

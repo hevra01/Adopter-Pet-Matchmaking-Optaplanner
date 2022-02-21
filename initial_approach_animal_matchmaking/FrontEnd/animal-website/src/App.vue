@@ -5,15 +5,10 @@
 </template>
 
 <script>
-import RegisterPage from "@/views/RegisterPage";
-import LoginPage from "@/views/LoginPage";
+
 
 export default {
-  name: "App",
-  components: {
-    LoginPage,
-    RegisterPage
-  }
+  name: "App"
 }
 </script>
 
