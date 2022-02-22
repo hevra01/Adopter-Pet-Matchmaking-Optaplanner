@@ -1,8 +1,10 @@
 <template>
   <NavBar/>
-  <transition name="moveInUp">
-    <router-view/>
-  </transition>
+  <router-view v-slot="{ Component }">
+    <transition name="moveInUp">
+      <component :is="Component"/>
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -19,15 +21,14 @@ export default {
 <style lang="scss">
 #app {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-content: center;
+  flex-direction: column;
   background-image: url("assets/master-background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
-
+  min-height: 100vh;
 }
 
 .moveInUp-enter-active {

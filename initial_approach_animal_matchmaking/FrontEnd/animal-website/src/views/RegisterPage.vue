@@ -1,5 +1,5 @@
 <template>
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3 overflow-hidden">
+  <div class="mask d-flex align-items-center gradient-custom-3 overflow-hidden">
     <div class="container h-100 overflow-hidden">
       <div class="row d-flex justify-content-center align-items-center h-100 mt-3 overflow-hidden">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -9,24 +9,43 @@
 
               <form>
 
+                <div class="form-outline mb-4 row">
+                  <div class="col">
+                    <label class="form-label" for="fname">First Name</label>
+                    <input id="fname" class="form-control form-control-lg" type="text"/>
+                  </div>
+                  <div class="col">
+                    <label class="form-label" for="lname">Last Name</label>
+                    <input id="lname" class="form-control form-control-lg" type="text"/>
+                  </div>
+                </div>
+
+
                 <div class="form-outline mb-4">
-                  <input id="form3Example1cg" class="form-control form-control-lg" type="text"/>
-                  <label class="form-label" for="form3Example1cg">Your Name</label>
+                  <label class="form-label" for="email">Your Email</label>
+                  <input id="email" class="form-control form-control-lg" type="email"/>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input id="form3Example3cg" class="form-control form-control-lg" type="email"/>
-                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <label class="form-label" for="pwd">Password</label>
+                  <input id="pwd" class="form-control form-control-lg" type="password"/>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input id="form3Example4cg" class="form-control form-control-lg" type="password"/>
-                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <label class="form-label" for="pwdr">Repeat your password</label>
+                  <input id="pwdr" class="form-control form-control-lg" type="password"/>
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="tel">Phone Number</label>
+                  <input id="tel" class="form-control form-control-lg" type="tel"/>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input id="form3Example4cdg" class="form-control form-control-lg" type="password"/>
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                  <label class="form-label" for="tel">How Will You Use This Service?</label>
+                  <select class="form-select">
+                    <option selected value="0">Put a Pet Up for Adoption</option>
+                    <option value="1">Adopt a Pet</option>
+                  </select>
                 </div>
 
                 <div class="d-flex justify-content-center">
