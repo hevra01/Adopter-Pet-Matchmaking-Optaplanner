@@ -23,14 +23,14 @@ public class AdopterPetPair {
      */
 
     @PlanningEntityCollectionProperty
-    private List<Adopter> adopters;
+    private Adopter adopter;
 
     @PlanningScore
     private HardSoftScore score;
 
     public AdopterPetPair(List<Animal> animals, List<Adopter> adopters, HardSoftScore score) {
         this.animals = animals;
-        this.adopters = adopters;
+        this.adopter = adopter;
         this.score = score;
     }
 
@@ -42,12 +42,12 @@ public class AdopterPetPair {
         this.animals = animals;
     }
 
-    public List<Adopter> getAdopters() {
-        return adopters;
+    public Adopter getAdopters() {
+        return adopter;
     }
 
-    public void setAdopters(List<Adopter> adopters) {
-        this.adopters = adopters;
+    public void setAdopters(Adopter adopters) {
+        this.adopter = adopter;
     }
 
     public HardSoftScore getScore() {

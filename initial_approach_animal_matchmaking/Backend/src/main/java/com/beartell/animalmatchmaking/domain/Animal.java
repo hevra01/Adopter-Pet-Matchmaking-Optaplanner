@@ -16,8 +16,8 @@ public class Animal {
     @Id
     protected int id;
 
-    protected char animalType; // Animal type can either be C for cat or D for dog for the current
-                               // implementation
+    protected String animalType; // Animal type can either be C for cat or D for dog for the current
+                                 // implementation
     protected int expenses; // This will be specified in dollars.
 
     @ManyToOne
@@ -43,7 +43,7 @@ public class Animal {
      * The constructor can not initialize the adopter because initially the animal
      * isn't adopted by anyone.
      */
-    public Animal(char animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
+    public Animal(String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
             int shynessLevel) {
         this.animalType = animalType;
         this.expenses = expenses;
@@ -51,6 +51,14 @@ public class Animal {
         this.emotionalNeed = emotionalNeed;
         this.physicalActivityNeed = physicalActivityNeed;
         this.shynessLevel = shynessLevel;
+    }
+
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
     }
 
     public int getId() {
@@ -100,14 +108,6 @@ public class Animal {
 
     public void setAdder(Adder adder) {
         this.adder = adder;
-    }
-
-    public char getAnimalType() {
-        return animalType;
-    }
-
-    public void setAnimalType(char animalType) {
-        this.animalType = animalType;
     }
 
     public Adopter getAdopter() {
