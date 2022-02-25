@@ -28,7 +28,7 @@ public class AdopterPetPair {
     @PlanningScore
     private HardSoftScore score;
 
-    public AdopterPetPair(List<Animal> animals, List<Adopter> adopters, HardSoftScore score) {
+    public AdopterPetPair(List<Animal> animals, Adopter adopter, HardSoftScore score) {
         this.animals = animals;
         this.adopter = adopter;
         this.score = score;
@@ -46,7 +46,7 @@ public class AdopterPetPair {
         return adopter;
     }
 
-    public void setAdopters(Adopter adopters) {
+    public void setAdopters(Adopter adopter) {
         this.adopter = adopter;
     }
 

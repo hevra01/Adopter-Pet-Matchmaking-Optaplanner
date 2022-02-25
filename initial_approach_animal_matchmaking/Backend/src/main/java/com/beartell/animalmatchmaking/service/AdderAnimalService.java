@@ -20,6 +20,7 @@ public class AdderAnimalService {
     private AdderRepository adderRepository;
 
     public void addToAnimalList(Adder adder, Animal animal) {
+        animalRepository.save(animal);
         adder.getAnimals().add(animal);
         adderRepository.save(adder);
 

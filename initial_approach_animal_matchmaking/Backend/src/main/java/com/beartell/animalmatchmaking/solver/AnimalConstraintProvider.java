@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import static org.optaplanner.core.api.score.stream.Joiners.*;
 
 import java.lang.Math;
+import java.util.function.ToIntBiFunction;
 
 import javax.persistence.criteria.Join;
 
@@ -25,7 +26,6 @@ public class AnimalConstraintProvider implements ConstraintProvider {
 
         @Autowired
         private AdopterAnimalMatchService adopterAnimalMatchService;
-        private static final Constraint NULL = null;
 
         @Override
         public Constraint[] defineConstraints(ConstraintFactory constraintFactory) {
@@ -43,10 +43,6 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 socializingConstraint(constraintFactory)
 
                 };
-        }
-
-        public static Constraint getNull() {
-                return NULL;
         }
 
         private Constraint animalTypeConflict(ConstraintFactory constraintFactory) {
@@ -74,9 +70,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
         private Constraint expenseConstraint(ConstraintFactory constraintFactory) {
                 // The expenses of the animal to be matched should be affordable by the adopter.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class,
-                                                greaterThan(Animal::getExpenses,
-                                                                Adopter::getMoneyWillingToSpendForPetPerMonth))
+                                .join(Adopter.class, greaterThan(Animal::getExpenses,
+                                                Adopter::getMoneyWillingToSpendForPetPerMonth))
                                 .penalize("Adopter can not afford the expenses", HardSoftScore.ONE_HARD);
         }
 
@@ -92,7 +87,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The animal to be matched should be in the same country as the adopter.
                 // The animal's location is the same as its adder's location.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class, equal(a -> a.getAdder().getCountry(), b -> b.getCountry()))
+                                .join(Adopter.class)
+                                .filter((a, b) -> !a.getAdopter().getCountry().equals(b.getCountry()))
                                 .penalize("Location not matching", HardSoftScore.ONE_HARD);
         }
 
@@ -101,33 +97,28 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class, lessThan(Animal::getPhysicalActivityNeed,
                                                 Adopter::getPhysicalActivityTimeDevote))
-                                .penalize("Activeness level not matching", "HardSoftScore.ONE_SOFT",
-                                                // have a function inside the adopter/animal service that calculates
-                                                // this.
-                                                adopterAnimalMatchService.differenceInActivenessLevel(new Animal(),
-                                                                new Adopter()));
+                                .penalize("Activeness level not matching", HardSoftScore.ONE_SOFT,
+                                                adopterAnimalMatchService.differenceInActivenessLevel());
         }
 
         private Constraint busynessConstraint(ConstraintFactory constraintFactory) {
                 // The emotional need of the animal should be in accordance to the busyness of
                 // its future adopter.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class,
-                                                Joiners.greaterThan(Adopter::getBusyness, Animal::getEmotionalNeed))
+                                .join(Adopter.class, greaterThan(Animal::getEmotionalNeed,
+                                                Adopter::getBusyness))
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
-                                                abs((adopter -> adopter.getBusyness())
-                                                                - (animal -> animal.getEmotionalNeed())));
+                                                adopterAnimalMatchService.differenceInBusynessLevel());
         }
 
         private Constraint socializingConstraint(ConstraintFactory constraintFactory) {
                 // The shyness of the animal should be in accordance to how social its future
                 // adopter is.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class,
-                                                Joiners.greaterThan(Adopter::getSocialLevel, Animal::getShynessLevel))
+                                .join(Adopter.class, greaterThan(Animal::getShynessLevel,
+                                                Adopter::getSocialLevel))
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
-                                                abs((adopter -> adopter.getSocialLevel())
-                                                                - (animal -> animal.getShynessLevel())));
+                                                adopterAnimalMatchService.differenceInSocializingLevel());
         }
 
 }
