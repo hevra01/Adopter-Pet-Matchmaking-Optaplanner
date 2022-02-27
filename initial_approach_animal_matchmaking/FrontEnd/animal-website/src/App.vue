@@ -13,9 +13,9 @@ import NavBar from "@/components/NavBar";
 export default {
   name: "App",
   components: {
-    NavBar
-  }
-}
+    NavBar,
+  },
+};
 </script>
 
 <style lang="scss">
@@ -48,7 +48,7 @@ export default {
 }
 
 .moveInUp-leave-active {
-  animation: moveInUp .3s ease-in;
+  animation: moveInUp 0.3s ease-in;
 }
 
 @keyframes moveInUp {
@@ -60,5 +60,5 @@ export default {
   }
 }
 
-@import '~bootstrap';
+@import "~bootstrap";
 </style>

@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-    <div class=" navbar-collapse justify-content-md-center">
+    <div class="navbar-collapse justify-content-md-center">
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
@@ -16,13 +16,7 @@
 <script>
 export default {
   name: "NavBar",
-  methods: {
-    Logout() {
-    }
-  }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
