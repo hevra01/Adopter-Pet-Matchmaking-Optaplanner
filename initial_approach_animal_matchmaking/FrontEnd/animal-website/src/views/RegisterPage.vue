@@ -7,7 +7,7 @@
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-              <form>
+              <form @submit.prevent="signUp">
 
                 <div class="form-outline mb-4 row">
                   <div class="col">
@@ -42,23 +42,22 @@
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="tel">How Will You Use This Service?</label>
-                  <select class="form-select">
-                    <option selected value="0">Put a Pet Up for Adoption</option>
-                    <option value="1">Adopt a Pet</option>
+                  <select v-model="uinfo.acctype" class="form-select">
+                    <option v-bind:value="`adder`">Put a Pet Up for Adoption</option>
+                    <option v-bind:value="`adopter`">Adopt a Pet</option>
                   </select>
                 </div>
 
                 <div class="d-flex justify-content-center">
-                  <button class="btn btn-outline-light btn-lg px-5" type="button">Register
+                  <button class="btn btn-outline-light btn-lg px-5" type="submit">Register
                   </button>
                 </div>
 
-                <p class="text-center text-muted mt-4 mb-0">Have already an account?
-                  <router-link class="fw-bold text-white" to="/"><u>Login here</u></router-link>
-                </p>
 
               </form>
-
+              <p class="text-center text-muted mt-4 mb-0">Have already an account?
+                <router-link class="fw-bold text-white" to="/"><u>Login here</u></router-link>
+              </p>
             </div>
           </div>
         </div>
@@ -68,9 +67,37 @@
 </template>
 
 <script>
+import AuthService from "@/services/AuthService";
+
 export default {
-  name: "RegisterPage"
-}
+  name: "RegisterPage",
+  data() {
+    return {
+      uinfo: {
+        fname: "",
+        lname: "",
+        email: "",
+        pwd: "",
+        pwdr: "",
+        tel: "",
+        acctype: "adder"
+      },
+      response: ""
+    }
+  },
+  methods: {
+    async signUp() {
+      try {
+        const credentials = this.uinfo;
+        const result = await AuthService.signUp(credentials);
+        this.response = result.msg;
+        this.$router.push('/')
+      } catch (e) {
+        this.response = e.response.data.msg;
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>

@@ -26,6 +26,7 @@
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
               </form>
+              <p v-if="response">{{ response }}</p>
 
               <div>
                 <p class="mb-0">Don't have an account?
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import AuthService from "@/services/AuthService";
 
 export default {
   name: "LoginPage",
@@ -56,22 +57,21 @@ export default {
     }
   },
   methods: {
-    login() {
-      axios({
-        method: "POST",
-        "url": "192.168.0.180:5555",
-        "data": this.input,
-        "headers": {"content-type": "application/json"}
-      }).then(result => {
-        this.response = result.data;
-        localStorage.setItem("user", this.response.data.token);
-      }, error => {
-        console.error(error);
-
-      });
+    async login() {
+      try {
+        const credentials = this.input;
+        const result = await AuthService.login(credentials);
+        this.response = result.msg;
+        const token = result.token;
+        const user = response.user;
+        this.$store.dispatch('login', {token, user});
+        this.$router.push('/contact') //placeholder
+      } catch (e) {
+        this.response = e.response.data.msg;
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
