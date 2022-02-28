@@ -2,6 +2,7 @@ package com.beartell.animalmatchmaking.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,6 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String surname;

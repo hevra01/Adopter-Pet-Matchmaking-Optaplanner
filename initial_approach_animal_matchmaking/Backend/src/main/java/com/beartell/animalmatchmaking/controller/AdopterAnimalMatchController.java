@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 */
 
 @RestController
-@RequestMapping("/AdopterPetPair")
+@RequestMapping("/api/AdopterPetPair")
 public class AdopterAnimalMatchController {
 
-    @Autowired
+    // @Autowired
     private SolverManager<AdopterPetPair, UUID> solverManager;
 
     /*
@@ -34,6 +34,7 @@ public class AdopterAnimalMatchController {
      * However, after sending it to the solve function, the Planning Entity will get
      * values assigned to it.
      */
+
     @PostMapping("/solve")
     public AdopterPetPair solve(@RequestBody AdopterPetPair problem) {
         // represents an immutable universally unique identifier (UUID)

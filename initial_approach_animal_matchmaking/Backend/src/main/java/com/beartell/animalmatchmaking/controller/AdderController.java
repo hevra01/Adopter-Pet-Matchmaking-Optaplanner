@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/adder")
+@RestController
+@RequestMapping("/api/adder")
 public class AdderController {
 
     // the controller needs to be autowired with the service so that it can call its
@@ -34,6 +35,8 @@ public class AdderController {
         return adderService.findAll();
     }
 
+    // the below getMappings need to be changed to username because
+    // the below id is a technical id.
     @GetMapping("/get")
     public Adder findAdder(@RequestParam("id") long id) {
         return adderService.findAdder(id);

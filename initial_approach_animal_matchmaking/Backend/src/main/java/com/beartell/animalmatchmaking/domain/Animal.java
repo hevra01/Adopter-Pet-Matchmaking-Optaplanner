@@ -43,18 +43,23 @@ public class Animal {
      * The constructor can not initialize the adopter because initially the animal
      * isn't adopted by anyone.
      */
-    public Animal(String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
-            int shynessLevel) {
+
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public Animal(int id, String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
+            int shynessLevel, boolean adopted, int age, boolean alive) {
+        this.id = id;
         this.animalType = animalType;
         this.expenses = expenses;
         this.adder = adder;
         this.emotionalNeed = emotionalNeed;
         this.physicalActivityNeed = physicalActivityNeed;
         this.shynessLevel = shynessLevel;
-    }
-
-    public String getAnimalType() {
-        return animalType;
+        this.adopted = adopted;
+        this.age = age;
+        this.alive = alive;
     }
 
     public void setAnimalType(String animalType) {

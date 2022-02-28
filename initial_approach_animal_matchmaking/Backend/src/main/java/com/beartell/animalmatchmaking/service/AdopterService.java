@@ -25,6 +25,14 @@ public class AdopterService {
     public boolean deleteAdopter(long id) {
         adopterRepository.deleteById(id);
         return true;
+
+        // another way
+        /*
+         * Optional <Adopter> adopter = adopterRepository.findbyId(id);
+         * 
+         * if(adopter.isPresent()))
+         * adopterRepository.delete(adopter.get());
+         */
     }
 
     public Adopter findById(long id) {

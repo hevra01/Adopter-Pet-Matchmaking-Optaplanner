@@ -8,10 +8,9 @@ public class Cat extends Animal {
     public Cat() {
     }
 
-    public Cat(char animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
+    public Cat(String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
             int shynessLevel) {
-        super(animalType, expenses, adder, emotionalNeed, physicalActivityNeed,
-                shynessLevel);
+        super();
         // TODO Auto-generated constructor stub
     }
 
