@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-    <div class=" navbar-collapse justify-content-md-center">
+    <div class="navbar-collapse justify-content-md-center">
       <ul class="navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/contact">About</router-link>
+          <router-link class="nav-link" to="/contact">Contact Us</router-link>
         </li>
       </ul>
     </div>
@@ -15,10 +15,8 @@
 
 <script>
 export default {
-  name: "NavBar"
-}
+  name: "NavBar",
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
