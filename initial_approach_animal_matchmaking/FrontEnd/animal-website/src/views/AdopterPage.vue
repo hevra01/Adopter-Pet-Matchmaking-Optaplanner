@@ -5,14 +5,12 @@
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5 mb-4"
         to=""
     >Adopt a Pet
-    </router-link
-    >
+    </router-link>
     <router-link
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5 mb-4"
         to=""
     >Current Pets
-    </router-link
-    >
+    </router-link>
     <button
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5"
         @click="logout"
