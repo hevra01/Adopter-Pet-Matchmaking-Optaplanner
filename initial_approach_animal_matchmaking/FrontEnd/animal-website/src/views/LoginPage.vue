@@ -15,7 +15,7 @@
                   <label class="form-label" for="email">Email</label>
                   <input
                       id="email"
-                      v-model="input.email"
+                      v-model="input.id"
                       class="form-control form-control-lg"
                       name="email"
                       placeholder="Email"
@@ -48,8 +48,7 @@
                   Don't have an account?
                   <router-link class="text-white-50 fw-bold" to="/register"
                   >Sign Up
-                  </router-link
-                  >
+                  </router-link>
                 </p>
               </div>
             </div>
@@ -68,7 +67,7 @@ export default {
   data() {
     return {
       input: {
-        email: "",
+        id: "",
         password: "",
       },
       response: "",

@@ -2,17 +2,24 @@ import axios from "axios";
 
 const url = "http://localhost:3000/api/";
 export default {
-  login(credentials) {
+  loginAdder(credentials) {
     return axios
-        .post(url + "login/", credentials)
+        .post(url + "adder/get/", credentials)
         .then((response) => response.data);
   },
-  signUp(credentials) {
+  loginAdopter(credentials) {
     return axios
-        .post(url + "sign-up/", credentials)
+        .post(url + "adopter/get/", credentials)
         .then((response) => response.data);
   },
-  getSecretContent() {
-    return axios.get(url + "secret-route/").then((response) => response.data);
+  signUpAdder(credentials) {
+    return axios
+        .post(url + "adder/add/", credentials)
+        .then((response) => response.data);
+  },
+  signUpAdopter(credentials) {
+    return axios
+        .post(url + "adopter/add/", credentials)
+        .then((response) => response.data);
   },
 };

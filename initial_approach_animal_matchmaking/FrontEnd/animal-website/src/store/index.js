@@ -33,6 +33,7 @@ export default createStore({
     },
   },
   actions: {
+    // eslint-disable-next-line
     login: ({commit, dispatch}, {token, user}) => {
       commit("SET_TOKEN", token);
       commit("SET_USER", user);
