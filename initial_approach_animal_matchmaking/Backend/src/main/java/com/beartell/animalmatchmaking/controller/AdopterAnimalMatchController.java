@@ -3,9 +3,13 @@ package com.beartell.animalmatchmaking.controller;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
+import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.AdopterPetPair;
+import com.beartell.animalmatchmaking.dto.FormDTO;
+import com.beartell.animalmatchmaking.repository.AnimalRepository;
+import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
+
 import org.optaplanner.core.api.solver.SolverJob;
-import org.optaplanner.core.api.solver.SolverManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/AdopterPetPair")
 public class AdopterAnimalMatchController {
 
-    // @Autowired
-    private SolverManager<AdopterPetPair, UUID> solverManager;
+    @Autowired
+    private AdopterAnimalMatchService adopterAnimalMatchService;
+
+    @Autowired
+    private AnimalRepository animalRepository;
 
     /*
      * AdopterPetPair is the @PlanningSolution which contains both
@@ -35,20 +42,10 @@ public class AdopterAnimalMatchController {
      * values assigned to it.
      */
 
-    @PostMapping("/solve")
-    public AdopterPetPair solve(@RequestBody AdopterPetPair problem) {
-        // represents an immutable universally unique identifier (UUID)
-        UUID problemId = UUID.randomUUID();
-
-        // Submit the problem to start solving
-        SolverJob<AdopterPetPair, UUID> solverJob = solverManager.solve(problemId, problem);
-        AdopterPetPair solution;
-        try {
-            // Wait until the solving ends
-            solution = solverJob.getFinalBestSolution();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new IllegalStateException("Solving failed.", e);
-        }
+    @PostMapping("/findMatch") // this needs to be id/username.
+    public AdopterPetPair solve(@RequestBody Adopter adopter) {
+        AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch(adopter);
         return solution;
     }
+
 }

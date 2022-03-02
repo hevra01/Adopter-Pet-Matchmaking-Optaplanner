@@ -36,8 +36,4 @@ public class AdderAnimalController {
         adderAnimalService.addToAnimalList(animalDTO);
     }
 
-    @GetMapping("/multiply")
-    long multiply(@RequestParam("x") long x, @RequestParam("y") long y) {
-        return x * y;
-    }
 }

@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /*
     User is the parent class of Adopter and Adder.
  */
@@ -19,12 +17,26 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(name = "Name", length = 50, nullable = false)
     private String name;
+
+    @Column(name = "Surname", length = 50, nullable = false)
     private String surname;
+
+    @Column(name = "UserName", length = 50, nullable = false)
     private String username;
+
+    @Column(name = "EmailAddress", length = 50, nullable = false)
     private String emailAddress;
+
+    @Column(name = "PhoneNumber", length = 50, nullable = false)
     private String phoneNumber;
+
+    @Column(name = "Country", length = 50, nullable = false)
     private String Country;
+
+    @Column(name = "City", length = 50, nullable = false)
     private String City;
 
     public User() {

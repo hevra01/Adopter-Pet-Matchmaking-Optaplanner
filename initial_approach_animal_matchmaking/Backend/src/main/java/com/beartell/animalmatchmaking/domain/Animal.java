@@ -1,6 +1,8 @@
 package com.beartell.animalmatchmaking.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -14,11 +16,8 @@ import org.springframework.stereotype.Component;
 public class Animal {
 
     @Id
+    @GeneratedValue
     protected int id;
-
-    protected String animalType; // Animal type can either be C for cat or D for dog for the current
-                                 // implementation
-    protected int expenses; // This will be specified in dollars.
 
     @ManyToOne
     protected Adder adder;
@@ -26,14 +25,32 @@ public class Animal {
     @ManyToOne
     protected Adopter adopter;
 
+    @Column(name = "AnimalType", length = 50, nullable = false)
+    protected String animalType; // Animal type can either be C for cat or D for dog for the current
+                                 // implementation
+
+    @Column(name = "Expenses", length = 50, nullable = false)
+    protected int expenses; // This will be specified in dollars.
+
+    @Column(name = "EmotionalNeed", length = 50, nullable = false)
     protected int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
                                  // care.
+
+    @Column(name = "PhysicalActivityNeed", length = 50, nullable = false)
     protected int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
                                         // activity.
+
+    @Column(name = "ShynessLevel", length = 50, nullable = false)
     protected int shynessLevel; // This will be on a scale of 1 to 10. 10 implying very shy.
+
+    @Column(name = "Adopted", length = 10, nullable = false)
     protected boolean adopted; // This will be true if the animal is adopted and false if it still has not
                                // been.
+
+    @Column(name = "Age", length = 2, nullable = false)
     protected int age;
+
+    @Column(name = "Alive", length = 10, nullable = false)
     protected boolean alive; // This will be true if the animal is living.
 
     public Animal() {

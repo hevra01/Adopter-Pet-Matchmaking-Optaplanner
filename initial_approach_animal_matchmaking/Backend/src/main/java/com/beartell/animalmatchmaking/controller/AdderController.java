@@ -43,7 +43,7 @@ public class AdderController {
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteAdopt(@RequestParam("id") long id) {
+    public boolean deleteAdder(@RequestParam("id") long id) {
         return adderService.deleteAdder(id);
     }
 }

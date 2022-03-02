@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
@@ -28,6 +30,32 @@ public class Adopter extends User {
     @Transient
     private Animal myAnimal;
 
+    @Column(name = "InMatcher", length = 10, nullable = false)
+    private boolean inMatcher;
+
+    @OneToMany(mappedBy = "adopter")
+    private List<Animal> animals;
+
+    @OneToOne
+    @JoinColumn(name = "formId")
+    private Form form; // the adopter should be able to change this form whenever they want to
+
+    public boolean isInMatcher() {
+        return inMatcher;
+    }
+
+    public void setInMatcher(boolean inMatcher) {
+        this.inMatcher = inMatcher;
+    }
+
+    public Form getForm() {
+        return form;
+    }
+
+    public void setForm(Form form) {
+        this.form = form;
+    }
+
     /*
      * We don't want to loss the data of the animals adopted by an adopter.
      * We might need the data later on for analysis. For that reason, we are keeping
@@ -36,65 +64,26 @@ public class Adopter extends User {
      * already
      * adopted by the adopter. Whereas, myAnimal being the pet to be matched now.
      */
-    @OneToMany(mappedBy = "adopter")
-    private List<Animal> animals;
-
-    // Used for hard constraint and the country of the adopter will also be a hard
-    // constraint.
-    @Column(name = "MoneySpentForPet", length = 50, nullable = false)
-    private int moneyWillingToSpendForPetPerMonth;
-
-    @Column(name = "PetType", length = 50, nullable = false)
-    private String petType;
-
-    // Used for soft constraint.
-    @Column(name = "Busyness", length = 3, nullable = false)
-    private int busyness; // this will be on a scale of 1 to 10. 10 implying the most busy.
-
-    @Column(name = "PhysicalActivityTimeDevote", length = 3, nullable = false)
-    private int physicalActivityTimeDevote; // this will be on a scale of 1 to 10. 10 implying a lot of time.
-
-    @Column(name = "SocialLevel", length = 3, nullable = false)
-    private int socialLevel; // this will be on a scale of 1 to 10. 10 implying very social.
 
     public Adopter() {
     }
 
-    /*
-     * Initially, we can only initialize the id because the user has not adopted a
-     * pet yet.
-     */
-    public Adopter(String name, String surname, String username, String emailAddress, String phoneNumber, Long id,
-            List<Animal> animals, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
-            int physicalActivityTimeDevote, int socialLevel) {
-        super(name, surname, username, emailAddress, phoneNumber);
-        this.planningId = id;
-        this.animals = animals;
-        this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
-        this.petType = petType;
-        this.busyness = busyness;
-        this.physicalActivityTimeDevote = physicalActivityTimeDevote;
-        this.socialLevel = socialLevel;
-    }
-
-    public int getMoneyWillingToSpendForPetPerMonth() {
-        return moneyWillingToSpendForPetPerMonth;
-    }
-
-    public void setMoneyWillingToSpendForPetPerMonth(int moneyWillingToSpendForPetPerMonth) {
-        this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
-    }
-
-    public String getPetType() {
-        return petType;
-    }
-
-    public void setPetType(String petType) {
-        this.petType = petType;
-    }
-
     public Long getPlanningId() {
         return planningId;
+    }
+
+    public Adopter(Long planningId, Animal myAnimal, List<Animal> animals) {
+        this.planningId = planningId;
+        this.myAnimal = myAnimal;
+        this.animals = animals;
+    }
+
+    public Adopter(String name, String surname, String username, String emailAddress, String phoneNumber,
+            Long planningId, Animal myAnimal, List<Animal> animals) {
+        super(name, surname, username, emailAddress, phoneNumber);
+        this.planningId = planningId;
+        this.myAnimal = myAnimal;
+        this.animals = animals;
     }
 
     public void setPlanningId(Long planningId) {
@@ -116,29 +105,4 @@ public class Adopter extends User {
     public void setAnimals(List<Animal> animals) {
         this.animals = animals;
     }
-
-    public int getBusyness() {
-        return busyness;
-    }
-
-    public void setBusyness(int busyness) {
-        this.busyness = busyness;
-    }
-
-    public int getPhysicalActivityTimeDevote() {
-        return physicalActivityTimeDevote;
-    }
-
-    public void setPhysicalActivityTimeDevote(int physicalActivityTimeDevote) {
-        this.physicalActivityTimeDevote = physicalActivityTimeDevote;
-    }
-
-    public int getSocialLevel() {
-        return socialLevel;
-    }
-
-    public void setSocialLevel(int socialLevel) {
-        this.socialLevel = socialLevel;
-    }
-
 }

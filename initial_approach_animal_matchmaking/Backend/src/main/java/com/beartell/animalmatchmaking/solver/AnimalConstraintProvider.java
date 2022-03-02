@@ -5,6 +5,7 @@ import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
 import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.Animal;
+import com.beartell.animalmatchmaking.domain.Form;
 
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
@@ -55,7 +56,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                  */
 
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class)
+                                .join(Form.class)
                                 .filter((a, b) -> !a.getAnimalType().equals(b.getPetType()))
                                 .penalize("Not the correct animal type", HardSoftScore.ONE_HARD);
         }
@@ -70,8 +71,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
         private Constraint expenseConstraint(ConstraintFactory constraintFactory) {
                 // The expenses of the animal to be matched should be affordable by the adopter.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class, greaterThan(Animal::getExpenses,
-                                                Adopter::getMoneyWillingToSpendForPetPerMonth))
+                                .join(Form.class, greaterThan(Animal::getExpenses,
+                                                Form::getMoneyWillingToSpendForPetPerMonth))
                                 .penalize("Adopter can not afford the expenses", HardSoftScore.ONE_HARD);
         }
 
@@ -95,8 +96,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
         private Constraint activenessConstraint(ConstraintFactory constraintFactory) {
                 // The activeness of the animal should be in similar to its future adopter.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class, lessThan(Animal::getPhysicalActivityNeed,
-                                                Adopter::getPhysicalActivityTimeDevote))
+                                .join(Form.class, lessThan(Animal::getPhysicalActivityNeed,
+                                                Form::getPhysicalActivityTimeDevote))
                                 .penalize("Activeness level not matching", HardSoftScore.ONE_SOFT,
                                                 adopterAnimalMatchService.differenceInActivenessLevel());
         }
@@ -105,8 +106,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The emotional need of the animal should be in accordance to the busyness of
                 // its future adopter.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class, greaterThan(Animal::getEmotionalNeed,
-                                                Adopter::getBusyness))
+                                .join(Form.class, greaterThan(Animal::getEmotionalNeed,
+                                                Form::getBusyness))
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
                                                 adopterAnimalMatchService.differenceInBusynessLevel());
         }
@@ -115,8 +116,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The shyness of the animal should be in accordance to how social its future
                 // adopter is.
                 return constraintFactory.forEach(Animal.class)
-                                .join(Adopter.class, greaterThan(Animal::getShynessLevel,
-                                                Adopter::getSocialLevel))
+                                .join(Form.class, greaterThan(Animal::getShynessLevel,
+                                                Form::getSocialLevel))
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
                                                 adopterAnimalMatchService.differenceInSocializingLevel());
         }

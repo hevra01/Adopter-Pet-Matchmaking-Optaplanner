@@ -34,6 +34,22 @@ public class AdopterController {
         return adopterService.findAll();
     }
 
+    /*
+     * The below two functions will be used for scheduling.
+     * If the adopter wants to be in the scheduler list, then they
+     * will be matched by a pet everyday. Otherwise, they won't receive
+     * notifications of being matched => passive adopters.
+     */
+    @GetMapping("/match")
+    public void scheduleForMatch(@RequestParam("id") long id) {
+        adopterService.beInMatcher(id);
+    }
+
+    @GetMapping("/doNotMatch")
+    public void doNotScheduleForMatch(@RequestParam("id") long id) {
+        adopterService.removeFromMatcher(id);
+    }
+
     @GetMapping("/get")
     public Adopter findAdopt(@RequestParam("id") long id) {
         return adopterService.findById(id);
