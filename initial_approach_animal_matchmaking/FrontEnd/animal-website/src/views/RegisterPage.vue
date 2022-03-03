@@ -15,7 +15,9 @@
                     <label class="form-label" for="fname">First Name</label>
                     <input
                         id="fname"
+                        v-model="uinfo.fname"
                         class="form-control form-control-lg"
+                        required
                         type="text"
                     />
                   </div>
@@ -23,7 +25,9 @@
                     <label class="form-label" for="lname">Last Name</label>
                     <input
                         id="lname"
+                        v-model="uinfo.lname"
                         class="form-control form-control-lg"
+                        required
                         type="text"
                     />
                   </div>
@@ -33,7 +37,9 @@
                   <label class="form-label" for="email">Your Email</label>
                   <input
                       id="email"
+                      v-model="uinfo.email"
                       class="form-control form-control-lg"
+                      required
                       type="email"
                   />
                 </div>
@@ -42,7 +48,9 @@
                   <label class="form-label" for="pwd">Password</label>
                   <input
                       id="pwd"
+                      v-model="uinfo.pwd"
                       class="form-control form-control-lg"
+                      required
                       type="password"
                   />
                 </div>
@@ -53,7 +61,9 @@
                   >
                   <input
                       id="pwdr"
+                      v-model="uinfo.pwdr"
                       class="form-control form-control-lg"
+                      required
                       type="password"
                   />
                 </div>
@@ -61,13 +71,15 @@
                   <label class="form-label" for="tel">Phone Number</label>
                   <input
                       id="tel"
+                      v-model="uinfo.tel"
                       class="form-control form-control-lg"
+                      required
                       type="tel"
                   />
                 </div>
 
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="tel"
+                  <label class="form-label"
                   >How Will You Use This Service?</label
                   >
                   <select v-model="uinfo.acctype" class="form-select">
@@ -79,6 +91,9 @@
                 </div>
 
                 <div class="d-flex justify-content-center">
+                  <p v-if="response" class="text-danger">{{ response }}</p>
+                </div>
+                <div class="d-flex justify-content-center">
                   <button
                       class="btn btn-outline-light btn-lg px-5"
                       type="submit"
@@ -87,6 +102,7 @@
                   </button>
                 </div>
               </form>
+
               <p class="text-center text-muted mt-4 mb-0">
                 Have already an account?
                 <router-link class="fw-bold text-white" to="/"
@@ -122,13 +138,24 @@ export default {
   },
   methods: {
     async signUp() {
-      try {
-        const credentials = this.uinfo;
-        const result = await AuthService.signUp(credentials);
-        this.response = result.msg;
-        this.$router.push("/");
-      } catch (e) {
-        this.response = e.response.data.msg;
+      console.log(
+          this.uinfo.pwd === this.uinfo.pwdr + this.uinfo.pwd + this.uinfo.pwdr
+      );
+      if (this.uinfo.pwd === this.uinfo.pwdr) {
+        try {
+          const credentials = this.uinfo;
+          const result =
+              this.uinfo.acctype === "adder"
+                  ? await AuthService.signUpAdder(credentials)
+                  : await AuthService.signUpAdopter(credentials);
+          this.response = result.msg;
+          console.log(this.response);
+          this.$router.push("/");
+        } catch (e) {
+          this.response = e;
+        }
+      } else {
+        this.response = "Passwords Don't Match";
       }
     },
   },
