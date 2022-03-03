@@ -21,12 +21,12 @@ public class AdderService {
         adderRepository.save(adder);
     }
 
-    public Adder findAdder(long id) {
-        return adderRepository.findById(id).orElse(null);
+    public Adder findAdder(String username) {
+        return adderRepository.findByUsername(username);
     }
 
-    public boolean deleteAdder(long id) {
-        adderRepository.deleteById(id);
+    public boolean deleteAdder(String username) {
+        adderRepository.deleteByUsername(username);
         return true;
     }
 

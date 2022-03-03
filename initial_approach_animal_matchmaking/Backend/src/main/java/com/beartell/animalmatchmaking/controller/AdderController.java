@@ -38,12 +38,12 @@ public class AdderController {
     // the below getMappings need to be changed to username because
     // the below id is a technical id.
     @GetMapping("/get")
-    public Adder findAdder(@RequestParam("id") long id) {
-        return adderService.findAdder(id);
+    public Adder findAdder(@RequestParam("username") String username) {
+        return adderService.findAdder(username);
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteAdder(@RequestParam("id") long id) {
-        return adderService.deleteAdder(id);
+    public boolean deleteAdder(@RequestParam("username") String username) {
+        return adderService.deleteAdder(username);
     }
 }

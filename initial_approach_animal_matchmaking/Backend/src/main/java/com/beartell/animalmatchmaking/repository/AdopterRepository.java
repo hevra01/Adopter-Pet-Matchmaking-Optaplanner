@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AdopterRepository extends JpaRepository<Adopter, Long> {
+    Adopter findByUsername(String username);
 
+    void deleteByUsername(String username);
 }

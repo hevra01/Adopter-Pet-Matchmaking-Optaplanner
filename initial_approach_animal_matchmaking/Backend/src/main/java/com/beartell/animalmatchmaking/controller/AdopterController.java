@@ -41,22 +41,22 @@ public class AdopterController {
      * notifications of being matched => passive adopters.
      */
     @GetMapping("/match")
-    public void scheduleForMatch(@RequestParam("id") long id) {
-        adopterService.beInMatcher(id);
+    public void scheduleForMatch(@RequestParam("username") String username) {
+        adopterService.beInMatcher(username);
     }
 
     @GetMapping("/doNotMatch")
-    public void doNotScheduleForMatch(@RequestParam("id") long id) {
-        adopterService.removeFromMatcher(id);
+    public void doNotScheduleForMatch(@RequestParam("username") String username) {
+        adopterService.removeFromMatcher(username);
     }
 
     @GetMapping("/get")
-    public Adopter findAdopt(@RequestParam("id") long id) {
-        return adopterService.findById(id);
+    public Adopter findAdopt(@RequestParam("username") String username) {
+        return adopterService.findByUsername(username);
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteAdopt(@RequestParam("id") long id) {
-        return adopterService.deleteAdopter(id);
+    public boolean deleteAdopt(@RequestParam("username") String username) {
+        return adopterService.deleteAdopter(username);
     }
 }

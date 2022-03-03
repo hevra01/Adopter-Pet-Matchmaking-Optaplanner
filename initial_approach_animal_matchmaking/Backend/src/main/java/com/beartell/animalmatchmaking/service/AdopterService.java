@@ -31,29 +31,21 @@ public class AdopterService {
      * words,
      * they will be passive adopters.
      */
-    public void beInMatcher(long id) {
-        Adopter adopter = adopterRepository.getById(id);
+    public void beInMatcher(String username) {
+        Adopter adopter = adopterRepository.findByUsername(username);
         adopter.setInMatcher(true);
         adopterRepository.save(adopter);
     }
 
-    public void removeFromMatcher(long id) {
-        Adopter adopter = adopterRepository.getById(id);
+    public void removeFromMatcher(String username) {
+        Adopter adopter = adopterRepository.findByUsername(username);
         adopter.setInMatcher(false);
         adopterRepository.save(adopter);
     }
 
-    public boolean deleteAdopter(long id) {
-        adopterRepository.deleteById(id);
+    public boolean deleteAdopter(String username) {
+        adopterRepository.deleteByUsername(username);
         return true;
-
-        // another way
-        /*
-         * Optional <Adopter> adopter = adopterRepository.findbyId(id);
-         * 
-         * if(adopter.isPresent()))
-         * adopterRepository.delete(adopter.get());
-         */
     }
 
     public void createForm(Form form) {
@@ -62,6 +54,10 @@ public class AdopterService {
 
     public Adopter findById(long id) {
         return adopterRepository.findById(id).orElse(null);
+    }
+
+    public Adopter findByUsername(String username) {
+        return adopterRepository.findByUsername(username);
     }
 
     public List<Adopter> findAll() {

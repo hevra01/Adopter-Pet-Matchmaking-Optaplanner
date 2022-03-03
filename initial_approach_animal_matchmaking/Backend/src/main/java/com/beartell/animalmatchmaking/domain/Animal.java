@@ -1,5 +1,8 @@
 package com.beartell.animalmatchmaking.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +20,7 @@ public class Animal {
 
     @Id
     @GeneratedValue
-    protected int id;
+    int id;
 
     @ManyToOne
     protected Adder adder;
