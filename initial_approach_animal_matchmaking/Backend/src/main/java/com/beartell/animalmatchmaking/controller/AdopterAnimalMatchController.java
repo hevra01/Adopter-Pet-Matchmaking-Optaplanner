@@ -1,15 +1,10 @@
 package com.beartell.animalmatchmaking.controller;
 
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.AdopterPetPair;
-import com.beartell.animalmatchmaking.dto.FormDTO;
 import com.beartell.animalmatchmaking.repository.AnimalRepository;
 import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
 
-import org.optaplanner.core.api.solver.SolverJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

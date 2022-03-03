@@ -8,6 +8,8 @@ import com.github.javaparser.printer.lexicalpreservation.Added;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.domain.Animal;
 import com.beartell.animalmatchmaking.dto.AnimalDTO;
@@ -27,13 +29,18 @@ public class AdderAnimalService {
     public void addToAnimalList(AnimalDTO animalDTO) {
         Adder adder = adderRepository.findByUsername(animalDTO.getAdderUsername());
 
-        Animal animal = new Animal(animalDTO.getAnimalType(), animalDTO.getExpenses(),
-                adder, animalDTO.getEmotionalNeed(), animalDTO.getPhysicalActivityNeed(), animalDTO.getShynessLevel(),
-                animalDTO.isAdopted(), animalDTO.getAge(), animalDTO.isAlive());
+        Optional<Animal> animal2 = animalRepository.findById(124L);
+        if (!animal2.isPresent()) {
+            Animal animal = new Animal(animalDTO.getAnimalType(), animalDTO.getExpenses(),
+                    adder, animalDTO.getEmotionalNeed(), animalDTO.getPhysicalActivityNeed(),
+                    animalDTO.getShynessLevel(),
+                    animalDTO.isAdopted(), animalDTO.getAge(), animalDTO.isAlive());
 
-        animalRepository.save(animal);
+            animalRepository.save(animal);
 
-        adder.getAnimals().add(animal);
-        adderRepository.save(adder);
+            adder.getAnimals().add(animal);
+            adderRepository.save(adder);
+        }
+
     }
 }

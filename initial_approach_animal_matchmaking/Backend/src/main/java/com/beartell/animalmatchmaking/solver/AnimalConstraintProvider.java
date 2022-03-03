@@ -2,7 +2,6 @@ package com.beartell.animalmatchmaking.solver;
 
 import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
 
-import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.Animal;
 import com.beartell.animalmatchmaking.domain.Form;
@@ -11,16 +10,10 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;
 import org.optaplanner.core.api.score.stream.ConstraintProvider;
-import org.optaplanner.core.api.score.stream.Joiners;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static org.optaplanner.core.api.score.stream.Joiners.*;
-
-import java.lang.Math;
-import java.util.function.ToIntBiFunction;
-
-import javax.persistence.criteria.Join;
 
 @Component
 public class AnimalConstraintProvider implements ConstraintProvider {

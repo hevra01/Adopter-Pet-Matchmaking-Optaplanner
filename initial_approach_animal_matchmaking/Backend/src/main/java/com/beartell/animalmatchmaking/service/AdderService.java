@@ -17,8 +17,8 @@ public class AdderService {
     @Autowired
     private AdderRepository adderRepository;
 
-    public void saveAdder(Adder adder) {
-        adderRepository.save(adder);
+    public Adder saveAdder(Adder adder) {
+        return adderRepository.save(adder);
     }
 
     public Adder findAdder(String username) {
@@ -26,8 +26,11 @@ public class AdderService {
     }
 
     public boolean deleteAdder(String username) {
-        adderRepository.deleteByUsername(username);
-        return true;
+        int result = adderRepository.deleteByUsername(username);
+        if (result > 0) {
+            return true;
+        }
+        return false;
     }
 
     public List<Adder> findAll() {

@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * Adder is a child class of User. It can add animals, cats and dogs to the
  * database.

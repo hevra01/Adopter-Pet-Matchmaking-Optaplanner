@@ -7,7 +7,6 @@ import com.beartell.animalmatchmaking.service.AdderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +25,8 @@ public class AdderController {
     private AdderService adderService;
 
     @PostMapping("/add")
-    public void addAdder(@RequestBody Adder adder) {
-        adderService.saveAdder(adder);
+    public Adder addAdder(@RequestBody Adder adder) {
+        return adderService.saveAdder(adder);
     }
 
     @GetMapping("/all")
@@ -46,4 +45,5 @@ public class AdderController {
     public boolean deleteAdder(@RequestParam("username") String username) {
         return adderService.deleteAdder(username);
     }
+    // refactor, many to one, controller, requests
 }

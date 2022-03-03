@@ -12,9 +12,6 @@ import javax.persistence.Transient;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  * 

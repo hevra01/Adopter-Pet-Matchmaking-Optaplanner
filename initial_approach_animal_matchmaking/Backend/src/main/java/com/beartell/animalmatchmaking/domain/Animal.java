@@ -1,5 +1,7 @@
 package com.beartell.animalmatchmaking.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -166,6 +168,73 @@ public class Animal {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((adder == null) ? 0 : adder.hashCode());
+        result = prime * result + (adopted ? 1231 : 1237);
+        result = prime * result + ((adopter == null) ? 0 : adopter.hashCode());
+        result = prime * result + age;
+        result = prime * result + (alive ? 1231 : 1237);
+        result = prime * result + ((animalType == null) ? 0 : animalType.hashCode());
+        result = prime * result + emotionalNeed;
+        result = prime * result + expenses;
+        result = prime * result + id;
+        result = prime * result + physicalActivityNeed;
+        result = prime * result + shynessLevel;
+        result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Animal other = (Animal) obj;
+        if (adder == null) {
+            if (other.adder != null)
+                return false;
+        } else if (!adder.equals(other.adder))
+            return false;
+        if (adopted != other.adopted)
+            return false;
+        if (adopter == null) {
+            if (other.adopter != null)
+                return false;
+        } else if (!adopter.equals(other.adopter))
+            return false;
+        if (age != other.age)
+            return false;
+        if (alive != other.alive)
+            return false;
+        if (animalType == null) {
+            if (other.animalType != null)
+                return false;
+        } else if (!animalType.equals(other.animalType))
+            return false;
+        if (emotionalNeed != other.emotionalNeed)
+            return false;
+        if (expenses != other.expenses)
+            return false;
+        if (id != other.id)
+            return false;
+        if (physicalActivityNeed != other.physicalActivityNeed)
+            return false;
+        if (shynessLevel != other.shynessLevel)
+            return false;
+        if (uuid == null) {
+            if (other.uuid != null)
+                return false;
+        } else if (!uuid.equals(other.uuid))
+            return false;
+        return true;
     }
 
 }
