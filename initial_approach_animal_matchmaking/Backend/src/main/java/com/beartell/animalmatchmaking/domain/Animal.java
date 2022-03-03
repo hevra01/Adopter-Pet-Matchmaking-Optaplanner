@@ -1,16 +1,10 @@
 package com.beartell.animalmatchmaking.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /*
     Animal is the parent class whose children are Cat and Dog.
@@ -21,6 +15,9 @@ public class Animal {
     @Id
     @GeneratedValue
     int id;
+
+    @Column(unique = true)
+    private String uuid;
 
     @ManyToOne
     private Adder adder;
@@ -47,14 +44,13 @@ public class Animal {
     private int shynessLevel; // This will be on a scale of 1 to 10. 10 implying very shy.
 
     @Column(name = "Adopted", length = 10, nullable = false)
-    private boolean adopted; // This will be true if the animal is adopted and false if it still has not
-                             // been.
+    private boolean adopted;
 
     @Column(name = "Age", length = 2, nullable = false)
     private int age;
 
     @Column(name = "Alive", length = 10, nullable = false)
-    private boolean alive; // This will be true if the animal is living.
+    private boolean alive;
 
     public Animal() {
     }
@@ -63,14 +59,8 @@ public class Animal {
      * The constructor can not initialize the adopter because initially the animal
      * isn't adopted by anyone.
      */
-
-    public String getAnimalType() {
-        return animalType;
-    }
-
-    public Animal(int id, String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
+    public Animal(String animalType, int expenses, Adder adder, int emotionalNeed, int physicalActivityNeed,
             int shynessLevel, boolean adopted, int age, boolean alive) {
-        this.id = id;
         this.animalType = animalType;
         this.expenses = expenses;
         this.adder = adder;
@@ -80,6 +70,10 @@ public class Animal {
         this.adopted = adopted;
         this.age = age;
         this.alive = alive;
+    }
+
+    public String getAnimalType() {
+        return animalType;
     }
 
     public void setAnimalType(String animalType) {
@@ -118,7 +112,6 @@ public class Animal {
         this.shynessLevel = shynessLevel;
     }
 
-    // Getters and setters
     public Adder getAdder() {
         return adder;
     }
@@ -165,6 +158,14 @@ public class Animal {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
 }

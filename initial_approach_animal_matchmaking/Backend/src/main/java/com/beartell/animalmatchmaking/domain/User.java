@@ -24,7 +24,7 @@ public class User {
     @Column(name = "Surname", length = 50, nullable = false)
     private String surname;
 
-    @Column(name = "UserName", length = 50, nullable = false)
+    @Column(name = "Username", length = 50, nullable = false)
     private String username;
 
     @Column(name = "EmailAddress", length = 50, nullable = false)
@@ -34,10 +34,10 @@ public class User {
     private String phoneNumber;
 
     @Column(name = "Country", length = 50, nullable = false)
-    private String Country;
+    private String country;
 
     @Column(name = "City", length = 50, nullable = false)
-    private String City;
+    private String city;
 
     public User() {
     }
@@ -60,19 +60,19 @@ public class User {
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country = country;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     public String getName() {

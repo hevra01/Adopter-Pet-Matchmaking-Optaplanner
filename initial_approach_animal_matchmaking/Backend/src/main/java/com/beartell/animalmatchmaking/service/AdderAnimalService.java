@@ -25,9 +25,9 @@ public class AdderAnimalService {
     // physicalActivityNeed,
     // int shynessLevel, boolean adopted, int age, boolean alive
     public void addToAnimalList(AnimalDTO animalDTO) {
-        Adder adder = adderRepository.getById(animalDTO.getAdderID());
+        Adder adder = adderRepository.findByUsername(animalDTO.getAdderUsername());
 
-        Animal animal = new Animal(animalDTO.getId(), animalDTO.getAnimalType(), animalDTO.getExpenses(),
+        Animal animal = new Animal(animalDTO.getAnimalType(), animalDTO.getExpenses(),
                 adder, animalDTO.getEmotionalNeed(), animalDTO.getPhysicalActivityNeed(), animalDTO.getShynessLevel(),
                 animalDTO.isAdopted(), animalDTO.getAge(), animalDTO.isAlive());
 

@@ -31,7 +31,6 @@ public class AdderAnimalController {
 
     @PostMapping("/add")
     // we dont need adder because we have a foreign key to adder inside animal
-    // we can have a max of one request body
     void addAnimal(@RequestBody AnimalDTO animalDTO) {
         adderAnimalService.addToAnimalList(animalDTO);
     }
