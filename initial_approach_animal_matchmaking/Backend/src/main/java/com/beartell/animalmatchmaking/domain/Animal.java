@@ -23,38 +23,38 @@ public class Animal {
     int id;
 
     @ManyToOne
-    protected Adder adder;
+    private Adder adder;
 
     @ManyToOne
-    protected Adopter adopter;
+    private Adopter adopter;
 
     @Column(name = "AnimalType", length = 50, nullable = false)
-    protected String animalType; // Animal type can either be C for cat or D for dog for the current
-                                 // implementation
+    private String animalType; // Animal type can either be C for cat or D for dog for the current
+                               // implementation
 
     @Column(name = "Expenses", length = 50, nullable = false)
-    protected int expenses; // This will be specified in dollars.
+    private int expenses; // This will be specified in dollars.
 
     @Column(name = "EmotionalNeed", length = 50, nullable = false)
-    protected int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
-                                 // care.
+    private int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
+                               // care.
 
     @Column(name = "PhysicalActivityNeed", length = 50, nullable = false)
-    protected int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
-                                        // activity.
+    private int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
+                                      // activity.
 
     @Column(name = "ShynessLevel", length = 50, nullable = false)
-    protected int shynessLevel; // This will be on a scale of 1 to 10. 10 implying very shy.
+    private int shynessLevel; // This will be on a scale of 1 to 10. 10 implying very shy.
 
     @Column(name = "Adopted", length = 10, nullable = false)
-    protected boolean adopted; // This will be true if the animal is adopted and false if it still has not
-                               // been.
+    private boolean adopted; // This will be true if the animal is adopted and false if it still has not
+                             // been.
 
     @Column(name = "Age", length = 2, nullable = false)
-    protected int age;
+    private int age;
 
     @Column(name = "Alive", length = 10, nullable = false)
-    protected boolean alive; // This will be true if the animal is living.
+    private boolean alive; // This will be true if the animal is living.
 
     public Animal() {
     }
