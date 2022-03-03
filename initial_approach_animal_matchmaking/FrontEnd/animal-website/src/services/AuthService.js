@@ -1,25 +1,33 @@
 import axios from "axios";
 
-const url = "http://localhost:3000/api/";
+const url = "placeholder/api";
 export default {
   loginAdder(credentials) {
     return axios
-        .post(url + "adder/get/", credentials)
+        .post(url + "adder/get/", credentials, {
+          headers: {"content-type": "application/json"},
+        })
         .then((response) => response.data);
   },
   loginAdopter(credentials) {
     return axios
-        .post(url + "adopter/get/", credentials)
+        .post(url + "adopter/get/", credentials, {
+          headers: {"content-type": "application/json"},
+        })
         .then((response) => response.data);
   },
   signUpAdder(credentials) {
     return axios
-        .post(url + "adder/add/", credentials)
+        .post(url + "adder/add/", credentials, {
+          headers: {"content-type": "application/json"},
+        })
         .then((response) => response.data);
   },
   signUpAdopter(credentials) {
     return axios
-        .post(url + "adopter/add/", credentials)
+        .post(url + "adopter/add/", credentials, {
+          headers: {"content-type": "application/json"},
+        })
         .then((response) => response.data);
   },
 };

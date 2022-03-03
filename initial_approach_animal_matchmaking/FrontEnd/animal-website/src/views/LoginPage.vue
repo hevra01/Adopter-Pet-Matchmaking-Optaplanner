@@ -15,7 +15,7 @@
                   <label class="form-label" for="email">Email</label>
                   <input
                       id="email"
-                      v-model="input.id"
+                      v-model="input.username"
                       class="form-control form-control-lg"
                       name="email"
                       placeholder="Email"
@@ -35,6 +35,14 @@
                       required
                       type="password"
                   />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label">Account Type</label>
+                  <select v-model="acctype" class="form-select">
+                    <option v-bind:value="`adder`">Adder</option>
+                    <option v-bind:value="`adopter`">Adopter</option>
+                  </select>
                 </div>
 
                 <button class="btn btn-outline-light btn-lg px-5" type="submit">
@@ -67,9 +75,10 @@ export default {
   data() {
     return {
       input: {
-        id: "",
+        username: "",
         password: "",
       },
+      acctype: "adder",
       response: "",
     };
   },
@@ -77,14 +86,17 @@ export default {
     async login() {
       try {
         const credentials = this.input;
-        const result = await AuthService.login(credentials);
+        const result =
+            this.acctype === "adder"
+                ? await AuthService.loginAdder(credentials)
+                : await AuthService.loginAdopter(credentials);
         this.response = result.msg;
         const token = result.token;
         const user = result.user;
         this.$store.dispatch("login", {token, user});
         this.$router.push("/contact"); //placeholder
       } catch (e) {
-        this.response = e.response.data.msg;
+        this.response = e.message;
       }
     },
   },
