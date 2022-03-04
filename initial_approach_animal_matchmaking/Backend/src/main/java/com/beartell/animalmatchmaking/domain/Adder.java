@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 /**
  * Adder is a child class of User. It can add animals, cats and dogs to the
  * database.
@@ -14,6 +16,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Adder extends User {
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "adder")
     private List<Animal> animals = new ArrayList<Animal>();
 

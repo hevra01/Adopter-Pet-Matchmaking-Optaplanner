@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /*
     Animal is the parent class whose children are Cat and Dog.
  */
@@ -21,9 +23,11 @@ public class Animal {
     @Column(unique = true)
     private String uuid;
 
+    @JsonBackReference
     @ManyToOne
     private Adder adder;
 
+    @JsonBackReference
     @ManyToOne
     private Adopter adopter;
 
