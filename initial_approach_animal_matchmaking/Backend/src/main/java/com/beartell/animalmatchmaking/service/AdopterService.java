@@ -1,16 +1,12 @@
 package com.beartell.animalmatchmaking.service;
 
 import com.beartell.animalmatchmaking.repository.AdopterRepository;
-import com.beartell.animalmatchmaking.repository.AnimalRepository;
-
-import org.drools.compiler.lang.DRL5Expressions.relationalOp_return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import com.beartell.animalmatchmaking.domain.Adopter;
-import com.beartell.animalmatchmaking.domain.Animal;
 import com.beartell.animalmatchmaking.domain.Form;
 
 @Service
@@ -19,8 +15,8 @@ public class AdopterService {
     @Autowired
     private AdopterRepository adopterRepository;
 
-    public void addAdopter(Adopter adopter) {
-        adopterRepository.save(adopter);
+    public Adopter addAdopter(Adopter adopter) {
+        return adopterRepository.save(adopter);
     }
 
     /*
@@ -31,29 +27,41 @@ public class AdopterService {
      * words,
      * they will be passive adopters.
      */
-    public void beInMatcher(String username) {
+    public boolean beInMatcher(String username) {
         Adopter adopter = adopterRepository.findByUsername(username);
-        adopter.setInMatcher(true);
-        adopterRepository.save(adopter);
+        if (adopter != null) {
+            adopter.setInMatcher(true);
+            adopterRepository.save(adopter);
+            return true; // Implying that the adopter has been added to the list of matchers.
+        }
+
+        // Implying that there is no adopter with the given username, so the addition
+        // was not successful.
+        return false;
     }
 
-    public void removeFromMatcher(String username) {
+    public boolean removeFromMatcher(String username) {
         Adopter adopter = adopterRepository.findByUsername(username);
-        adopter.setInMatcher(false);
-        adopterRepository.save(adopter);
+        if (adopter != null) {
+            adopter.setInMatcher(false);
+            adopterRepository.save(adopter);
+            return true; // Implying that the adopter has been removed from the list of matchers.
+        }
+
+        // Implying that there is no adopter with the given username, so the removal was
+        // not successful.
+        return false;
     }
 
     public boolean deleteAdopter(String username) {
-        adopterRepository.deleteByUsername(username);
-        return true;
+        if (adopterRepository.deleteByUsername(username) > 0) {
+            return true;
+        }
+        return false;
     }
 
     public void createForm(Form form) {
 
-    }
-
-    public Adopter findById(long id) {
-        return adopterRepository.findById(id).orElse(null);
     }
 
     public Adopter findByUsername(String username) {

@@ -25,8 +25,8 @@ public class AdderAnimalController {
     AdderAnimalService adderAnimalService;
 
     @PostMapping("/add")
-    void addAnimal(@RequestBody AnimalDTO animalDTO) {
-        adderAnimalService.addToAnimalList(animalDTO);
+    boolean addAnimal(@RequestBody AnimalDTO animalDTO) {
+        return adderAnimalService.addToAnimalList(animalDTO);
     }
 
 }
