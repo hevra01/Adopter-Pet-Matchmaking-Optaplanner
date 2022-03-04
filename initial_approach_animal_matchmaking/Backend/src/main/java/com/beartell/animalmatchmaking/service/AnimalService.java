@@ -1,5 +1,7 @@
 package com.beartell.animalmatchmaking.service;
 
+import java.util.List;
+
 import com.beartell.animalmatchmaking.domain.Animal;
 import com.beartell.animalmatchmaking.repository.AnimalRepository;
 
@@ -14,6 +16,10 @@ public class AnimalService {
 
     public Animal findAnimalByUuid(String uuid) {
         return animalRepository.findByUuid(uuid);
+    }
+
+    public List<Animal> findAll() {
+        return animalRepository.findAll();
     }
 
 }

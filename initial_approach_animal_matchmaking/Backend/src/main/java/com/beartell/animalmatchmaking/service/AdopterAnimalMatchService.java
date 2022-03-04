@@ -55,7 +55,7 @@ public class AdopterAnimalMatchService {
     private AdopterRepository adopterRepository;
 
     @Autowired
-    private AnimalRepository animalRepository;
+    private AnimalService animalService;
 
     @Autowired
     private FormRepository formRepository;
@@ -89,7 +89,7 @@ public class AdopterAnimalMatchService {
         // represents an immutable universally unique identifier (UUID)
         UUID problemId = UUID.randomUUID();
 
-        AdopterPetPair problem = new AdopterPetPair(animalRepository.findAll(), adopter);
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopter);
 
         // Submit the problem to start solving
         SolverJob<AdopterPetPair, UUID> solverJob = solverManager.solve(problemId, problem);
