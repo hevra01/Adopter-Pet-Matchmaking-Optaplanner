@@ -42,9 +42,10 @@ public class AdopterAnimalMatchController {
      * values assigned to it.
      */
 
-    @PostMapping("/findMatch") // question: do we need to check if the adopter is already present or not?
-                               // can't we assume that the adopter is already present since they are
-                               // able to make the api call to solve.
+    // question: do we need to check if the adopter is already present or not?
+    // can't we assume that the adopter is already present since they are
+    // able to make the api call to solve.
+    @PostMapping("/findMatch")
     public AdopterPetPair solve(@RequestParam("username") String username) {
         Adopter adopter = adopterService.findByUsername(username);
 

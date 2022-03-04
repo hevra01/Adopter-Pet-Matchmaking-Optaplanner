@@ -6,21 +6,10 @@ package com.beartell.animalmatchmaking.dto;
 public class AnimalDTO {
 
     private String uuid;
-
     private String animalType; // Animal type can either be C for cat or D for dog for the current
                                // implementation
     private int expenses; // This will be specified in dollars.
-
     private String adderUsername;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     private int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
                                // care.
     private int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
@@ -29,6 +18,14 @@ public class AnimalDTO {
     private int age;
     private boolean adopted;
     private boolean alive;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public boolean isAlive() {
         return alive;

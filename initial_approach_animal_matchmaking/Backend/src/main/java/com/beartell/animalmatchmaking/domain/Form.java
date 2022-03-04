@@ -13,6 +13,10 @@ public class Form {
     @GeneratedValue
     private int id;
 
+    @Column(name = "AdopterUsername", length = 50, nullable = false, unique = true)
+    private String adopterUsername;
+
+    // A form can be found by it adopter. It is a one to one relation.
     @OneToOne(mappedBy = "form")
     private Adopter adopter;
 
@@ -37,14 +41,22 @@ public class Form {
     public Form() {
     }
 
-    public Form(int id, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
+    public Form(String adopterUsername, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
             int physicalActivityTimeDevote, int socialLevel) {
-        this.id = id;
+        this.adopterUsername = adopterUsername;
         this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
         this.petType = petType;
         this.busyness = busyness;
         this.physicalActivityTimeDevote = physicalActivityTimeDevote;
         this.socialLevel = socialLevel;
+    }
+
+    public String getAdopterUsername() {
+        return adopterUsername;
+    }
+
+    public void setAdopterUsername(String adopterUsername) {
+        this.adopterUsername = adopterUsername;
     }
 
     public int getId() {
