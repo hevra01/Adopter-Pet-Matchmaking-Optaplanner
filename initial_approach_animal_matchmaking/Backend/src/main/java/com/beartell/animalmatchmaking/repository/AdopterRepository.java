@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface AdopterRepository extends JpaRepository<Adopter, Long> {
     Adopter findByUsername(String username);
 
-    void deleteByUsername(String username);
+    int deleteByUsername(String username); // returns the number of adopters deleted
 }

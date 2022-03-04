@@ -1,9 +1,7 @@
 package com.beartell.animalmatchmaking.service;
 
 import com.beartell.animalmatchmaking.repository.AdderRepository;
-import com.beartell.animalmatchmaking.repository.AdopterRepository;
 import com.beartell.animalmatchmaking.repository.AnimalRepository;
-import com.github.javaparser.printer.lexicalpreservation.Added;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,24 +21,27 @@ public class AdderAnimalService {
     @Autowired
     private AdderRepository adderRepository;
 
-    // int id, String animalType, int expenses, Adder adder, int emotionalNeed, int
-    // physicalActivityNeed,
-    // int shynessLevel, boolean adopted, int age, boolean alive
-    public void addToAnimalList(AnimalDTO animalDTO) {
+    public boolean addToAnimalList(AnimalDTO animalDTO) {
         Adder adder = adderRepository.findByUsername(animalDTO.getAdderUsername());
 
-        Optional<Animal> animal2 = animalRepository.findById(124L);
-        if (!animal2.isPresent()) {
-            Animal animal = new Animal(animalDTO.getAnimalType(), animalDTO.getExpenses(),
-                    adder, animalDTO.getEmotionalNeed(), animalDTO.getPhysicalActivityNeed(),
-                    animalDTO.getShynessLevel(),
-                    animalDTO.isAdopted(), animalDTO.getAge(), animalDTO.isAlive());
-
-            animalRepository.save(animal);
-
-            adder.getAnimals().add(animal);
-            adderRepository.save(adder);
+        if (adder == null) {
+            return false; // There is no such adder with the given username.
         }
 
+        Animal animalPresent = animalRepository.findByUuid(animalDTO.getUuid());
+
+        if (animalPresent != null) {
+            return false; // animal is already present so we can not add it again.
+        }
+
+        Animal animal = new Animal(animalDTO.getUuid(), animalDTO.getAnimalType(), animalDTO.getExpenses(),
+                adder, animalDTO.getEmotionalNeed(), animalDTO.getPhysicalActivityNeed(),
+                animalDTO.getShynessLevel(),
+                animalDTO.isAdopted(), animalDTO.getAge(), animalDTO.isAlive());
+
+        animalRepository.save(animal);
+        adder.getAnimals().add(animal);
+        adderRepository.save(adder);
+        return true;
     }
 }
