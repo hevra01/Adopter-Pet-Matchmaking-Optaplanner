@@ -42,5 +42,4 @@ public class AdderController {
     public boolean deleteAdderByUsername(@RequestParam("username") String username) {
         return adderService.deleteAdder(username);
     }
-    // refactor, many to one, controller, requests
 }
