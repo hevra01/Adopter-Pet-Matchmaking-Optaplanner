@@ -96,12 +96,20 @@ public class Animal {
         this.id = id;
     }
 
-    public int getEmotionalNeed() {
+    public int getEmotionalIndependence() {
         return emotionalIndependence;
     }
 
-    public void setEmotionalNeed(int emotionalNeed) {
-        this.emotionalIndependence = emotionalNeed;
+    public void setEmotionalIndependence(int emotionalIndependence) {
+        this.emotionalIndependence = emotionalIndependence;
+    }
+
+    public int getExtroversionLevel() {
+        return extroversionLevel;
+    }
+
+    public void setExtroversionLevel(int extroversionLevel) {
+        this.extroversionLevel = extroversionLevel;
     }
 
     public int getPhysicalActivityNeed() {
@@ -110,14 +118,6 @@ public class Animal {
 
     public void setPhysicalActivityNeed(int physicalActivityNeed) {
         this.physicalActivityNeed = physicalActivityNeed;
-    }
-
-    public int getShynessLevel() {
-        return extroversionLevel;
-    }
-
-    public void setShynessLevel(int shynessLevel) {
-        this.extroversionLevel = shynessLevel;
     }
 
     public Adder getAdder() {

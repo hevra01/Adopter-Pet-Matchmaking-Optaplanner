@@ -1,14 +1,10 @@
 package com.beartell.animalmatchmaking.service;
 
 import com.beartell.animalmatchmaking.repository.AdopterRepository;
-import com.beartell.animalmatchmaking.repository.AnimalRepository;
-import com.beartell.animalmatchmaking.repository.FormRepository;
 import com.beartell.animalmatchmaking.scheduler.JobData;
 import com.beartell.animalmatchmaking.scheduler.ScheduledJob;
 import com.beartell.animalmatchmaking.solver.AnimalConstraintProvider;
 
-import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.api.score.buildin.simple.SimpleScore;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.SolverJob;
@@ -63,20 +59,22 @@ public class AdopterAnimalMatchService {
 
     public ToIntBiFunction differenceInActivenessLevel() {
 
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math
-                .abs(x.getPhysicalActivityNeed() - y.getPhysicalActivityTimeDevote());
+        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
+                .abs(x.getPhysicalActivityNeed() - y.getForm().getPhysicalActivityTimeDevote());
         return i;
     }
 
     public ToIntBiFunction differenceInBusynessLevel() {
 
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math.abs(x.getEmotionalNeed() - y.getBusyness());
+        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
+                .abs(x.getEmotionalIndependence() - y.getForm().getBusyness());
         return i;
     }
 
     public ToIntBiFunction differenceInSocializingLevel() {
 
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math.abs(x.getShynessLevel() - y.getSocialLevel());
+        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
+                .abs(x.getExtroversionLevel() - y.getForm().getSocialLevel());
         return i;
     }
 
