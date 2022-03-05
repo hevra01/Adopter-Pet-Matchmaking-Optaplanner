@@ -1,6 +1,6 @@
 <template>
   <div class="col-2 d-flex flex-column align-self-center">
-    <h1>Hi {{ fname }}</h1>
+    <h1>Hi {{ firstname }}</h1>
     <router-link
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5 mb-4"
         to=""
@@ -25,14 +25,14 @@ export default {
   name: "AdopterPage",
   data() {
     return {
-      fname: "",
+      firstname: "",
     };
   },
   async created() {
-    if (!this.$store.getters.isLoggedIn) {
+    if (!this.$store.getters.isLoggedIn || this.$store.getters.getUser.acctype !== "adopter") {
       await this.$router.push("/");
     }
-    this.fname = this.$store.getters.getUser.fname;
+    this.fname = this.$store.getters.getUser.firstname;
   },
   methods: {
     logout() {
