@@ -45,6 +45,17 @@
                 </div>
 
                 <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Your Username</label>
+                  <input
+                      id="username"
+                      v-model="uinfo.username"
+                      class="form-control form-control-lg"
+                      required
+                      type="text"
+                  />
+                </div>
+
+                <div class="form-outline mb-4">
                   <label class="form-label" for="pwd">Password</label>
                   <input
                       id="pwd"
@@ -131,6 +142,7 @@ export default {
         pwd: "",
         pwdr: "",
         tel: "",
+        username: "",
         acctype: "adder",
       },
       response: "",
@@ -144,13 +156,12 @@ export default {
       if (this.uinfo.pwd === this.uinfo.pwdr) {
         try {
           const credentials = this.uinfo;
-          const result =
+          this.response =
               this.uinfo.acctype === "adder"
                   ? await AuthService.signUpAdder(credentials)
                   : await AuthService.signUpAdopter(credentials);
-          this.response = result.msg;
           console.log(this.response);
-          this.$router.push("/");
+          await this.$router.push("/");
         } catch (e) {
           this.response = e;
         }

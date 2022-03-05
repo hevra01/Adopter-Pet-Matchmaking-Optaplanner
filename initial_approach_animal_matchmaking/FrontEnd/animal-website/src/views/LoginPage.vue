@@ -12,15 +12,15 @@
                 <p class="text-white-50 mb-5"></p>
 
                 <div class="form-outline form-white mb-4">
-                  <label class="form-label" for="email">Email</label>
+                  <label class="form-label" for="username">Username</label>
                   <input
-                      id="email"
+                      id="username"
                       v-model="input.username"
                       class="form-control form-control-lg"
-                      name="email"
-                      placeholder="Email"
+                      name="username"
+                      placeholder="Username"
                       required
-                      type="email"
+                      type="text"
                   />
                 </div>
 
@@ -94,7 +94,9 @@ export default {
         const token = result.token;
         const user = result.user;
         this.$store.dispatch("login", {token, user});
-        this.$router.push("/contact"); //placeholder
+        await this.$router.push(
+            this.acctype === "adder" ? "/AdderPage" : "/AdopterPage"
+        );
       } catch (e) {
         this.response = e.message;
       }

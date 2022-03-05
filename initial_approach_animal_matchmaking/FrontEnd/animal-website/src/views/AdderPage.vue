@@ -3,8 +3,8 @@
     <h1>Hi {{ firstname }}</h1>
     <router-link
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5 mb-4"
-        to=""
-    >Adopt a Pet
+        to="/addpet"
+    >Put a Pet Up For Adoption
     </router-link>
     <router-link
         class="btn btn-dark btn-outline-light border-0 btn-lg px-5 mb-4"
@@ -31,7 +31,7 @@ export default {
   async created() {
     if (
         !this.$store.getters.isLoggedIn ||
-        this.$store.getters.getUser.acctype !== "adopter"
+        this.$store.getters.getUser.acctype !== "adder"
     ) {
       await this.$router.push("/");
     }
