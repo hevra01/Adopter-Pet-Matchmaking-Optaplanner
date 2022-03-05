@@ -58,16 +58,9 @@ public class AnimalConstraintProvider implements ConstraintProvider {
 
         private Constraint animalTypeConflict(ConstraintFactory constraintFactory) {
                 // The animal to be matched should be of the type specified by the user.
-
-                /*
-                 * The .forEach(T) building block selects every T instance that is
-                 * in a problem fact collection or a planning entity collection and has no null
-                 * genuine planning variables.
-                 */
-
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> a.getAnimalType() != b.getForm().getPetType())
+                                .filter((a, b) -> b.getForm() != null || a.getAnimalType() != b.getForm().getPetType())
                                 .penalize("Not the correct animal type", HardSoftScore.ONE_HARD);
         }
 
@@ -82,7 +75,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The expenses of the animal to be matched should be affordable by the adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> a.getExpenses() > b.getForm().getMoneyWillingToSpendForPetPerMonth())
+                                .filter((a, b) -> b.getForm() != null
+                                                || a.getExpenses() > b.getForm().getMoneyWillingToSpendForPetPerMonth())
                                 .penalize("Adopter can not afford the expenses", HardSoftScore.ONE_HARD);
         }
 
@@ -103,11 +97,11 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 .penalize("Location not matching", HardSoftScore.ONE_HARD);
         }
 
-        public Constraint activenessConstraint(ConstraintFactory constraintFactory) {
+        private Constraint activenessConstraint(ConstraintFactory constraintFactory) {
                 // The activeness of the animal should be in similar to its future adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> a.getPhysicalActivityNeed() > b.getForm()
+                                .filter((a, b) -> b.getForm() != null || a.getPhysicalActivityNeed() > b.getForm()
                                                 .getPhysicalActivityTimeDevote())
                                 .penalize("Activeness level not matching", HardSoftScore.ONE_SOFT,
                                                 differenceInActivenessLevel());
@@ -118,7 +112,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // its future adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> a.getEmotionalIndependence() < b.getForm().getBusyness())
+                                .filter((a, b) -> b.getForm() != null
+                                                || a.getEmotionalIndependence() < b.getForm().getBusyness())
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
                                                 differenceInBusynessLevel());
         }
@@ -128,8 +123,9 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // adopter is.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> a.getExtroversionLevel() < b.getForm().getSocialLevel())
-                                .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
+                                .filter((a, b) -> b.getForm() != null
+                                                || a.getExtroversionLevel() < b.getForm().getSocialLevel())
+                                .penalize("Socializing level not matching", HardSoftScore.ONE_SOFT,
                                                 differenceInSocializingLevel());
         }
 

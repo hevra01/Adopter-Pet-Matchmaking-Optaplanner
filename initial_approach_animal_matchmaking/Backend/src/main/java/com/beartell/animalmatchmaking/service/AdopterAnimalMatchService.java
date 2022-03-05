@@ -5,6 +5,7 @@ import com.beartell.animalmatchmaking.scheduler.JobData;
 import com.beartell.animalmatchmaking.scheduler.ScheduledJob;
 import com.beartell.animalmatchmaking.solver.AnimalConstraintProvider;
 
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.SolverJob;
@@ -25,7 +26,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -62,7 +63,9 @@ public class AdopterAnimalMatchService {
         // represents an immutable universally unique identifier (UUID)
         UUID problemId = UUID.randomUUID();
 
-        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll());
+        HardSoftScore score = HardSoftScore.ZERO;
+
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), Arrays.asList(adopter), score);
 
         // Submit the problem to start solving
         SolverJob<AdopterPetPair, UUID> solverJob = solverManager.solve(problemId, problem);
@@ -145,7 +148,9 @@ public class AdopterAnimalMatchService {
 
         Solver<AdopterPetPair> solver = solverFactory.buildSolver(); // builds the solving algorithm
 
-        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll());
+        HardSoftScore score = HardSoftScore.ZERO;
+
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll(), score);
 
         AdopterPetPair solution = solver.solve(problem); // solves the problem
         return solution;

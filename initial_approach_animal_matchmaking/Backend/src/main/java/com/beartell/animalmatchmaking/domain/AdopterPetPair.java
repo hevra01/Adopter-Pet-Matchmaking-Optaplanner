@@ -16,19 +16,19 @@ public class AdopterPetPair {
     @ProblemFactCollectionProperty
     private List<Animal> animals;
 
-    /*
-     * The Planning Entity Collection will be adopter
-     */
-
     @PlanningEntityCollectionProperty
     private List<Adopter> adoptersInMatcher;
 
     @PlanningScore
     private HardSoftScore score;
 
-    public AdopterPetPair(List<Animal> animals, List<Adopter> adoptersInMatcher) {
+    public AdopterPetPair() {
+    }
+
+    public AdopterPetPair(List<Animal> animals, List<Adopter> adoptersInMatcher, HardSoftScore score) {
         this.animals = animals;
         this.adoptersInMatcher = adoptersInMatcher;
+        this.score = score;
     }
 
     public List<Animal> getAnimals() {
