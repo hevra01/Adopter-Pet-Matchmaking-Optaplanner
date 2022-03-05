@@ -29,7 +29,10 @@ export default {
     };
   },
   async created() {
-    if (!this.$store.getters.isLoggedIn || this.$store.getters.getUser.acctype !== "adopter") {
+    if (
+        !this.$store.getters.isLoggedIn ||
+        this.$store.getters.getUser.acctype !== "adopter"
+    ) {
       await this.$router.push("/");
     }
     this.fname = this.$store.getters.getUser.firstname;

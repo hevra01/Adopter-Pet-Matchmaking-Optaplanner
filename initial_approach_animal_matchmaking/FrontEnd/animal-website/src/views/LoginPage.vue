@@ -94,7 +94,9 @@ export default {
         const token = result.token;
         const user = result.user;
         this.$store.dispatch("login", {token, user});
-        await this.$router.push((this.acctype === "adder" ? "/AdderPage" : "/AdopterPage"));
+        await this.$router.push(
+            this.acctype === "adder" ? "/AdderPage" : "/AdopterPage"
+        );
       } catch (e) {
         this.response = e.message;
       }

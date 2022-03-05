@@ -156,9 +156,10 @@ export default {
       if (this.uinfo.pwd === this.uinfo.pwdr) {
         try {
           const credentials = this.uinfo;
-          this.response = this.uinfo.acctype === "adder"
-              ? await AuthService.signUpAdder(credentials)
-              : await AuthService.signUpAdopter(credentials);
+          this.response =
+              this.uinfo.acctype === "adder"
+                  ? await AuthService.signUpAdder(credentials)
+                  : await AuthService.signUpAdopter(credentials);
           console.log(this.response);
           await this.$router.push("/");
         } catch (e) {
