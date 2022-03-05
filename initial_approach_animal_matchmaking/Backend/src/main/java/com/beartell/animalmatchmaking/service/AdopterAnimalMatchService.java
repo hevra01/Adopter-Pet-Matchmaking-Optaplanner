@@ -57,27 +57,6 @@ public class AdopterAnimalMatchService {
     // @Autowired
     private SolverManager<AdopterPetPair, UUID> solverManager;
 
-    public ToIntBiFunction differenceInActivenessLevel() {
-
-        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
-                .abs(x.getPhysicalActivityNeed() - y.getForm().getPhysicalActivityTimeDevote());
-        return i;
-    }
-
-    public ToIntBiFunction differenceInBusynessLevel() {
-
-        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
-                .abs(x.getEmotionalIndependence() - y.getForm().getBusyness());
-        return i;
-    }
-
-    public ToIntBiFunction differenceInSocializingLevel() {
-
-        ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
-                .abs(x.getExtroversionLevel() - y.getForm().getSocialLevel());
-        return i;
-    }
-
     // Finds the best match for the adopter.
     public AdopterPetPair moreAccurateMatch(Adopter adopter) {
         // represents an immutable universally unique identifier (UUID)
