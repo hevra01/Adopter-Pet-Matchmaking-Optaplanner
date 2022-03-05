@@ -2,13 +2,10 @@ package com.beartell.animalmatchmaking.controller;
 
 import java.util.List;
 
-import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.service.AdopterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +22,8 @@ public class AdopterController {
     private AdopterService adopterService;
 
     @PostMapping("/add")
-    public void addAdopt(@RequestBody Adopter adopter) {
-        adopterService.addAdopter(adopter);
+    public Adopter addAdopt(@RequestBody Adopter adopter) {
+        return adopterService.addAdopter(adopter);
     }
 
     @GetMapping("/all")
@@ -41,22 +38,22 @@ public class AdopterController {
      * notifications of being matched => passive adopters.
      */
     @GetMapping("/match")
-    public void scheduleForMatch(@RequestParam("username") String username) {
-        adopterService.beInMatcher(username);
+    public boolean scheduleForMatch(@RequestParam("username") String username) {
+        return adopterService.beInMatcher(username);
     }
 
     @GetMapping("/doNotMatch")
-    public void doNotScheduleForMatch(@RequestParam("username") String username) {
-        adopterService.removeFromMatcher(username);
+    public boolean doNotScheduleForMatch(@RequestParam("username") String username) {
+        return adopterService.removeFromMatcher(username);
     }
 
     @GetMapping("/get")
-    public Adopter findAdopt(@RequestParam("username") String username) {
+    public Adopter findAdopterByUsername(@RequestParam("username") String username) {
         return adopterService.findByUsername(username);
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteAdopt(@RequestParam("username") String username) {
+    public boolean deleteAdopterByUsername(@RequestParam("username") String username) {
         return adopterService.deleteAdopter(username);
     }
 }

@@ -6,8 +6,6 @@ import com.beartell.animalmatchmaking.domain.Adder;
 import com.beartell.animalmatchmaking.service.AdderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +24,8 @@ public class AdderController {
     private AdderService adderService;
 
     @PostMapping("/add")
-    public void addAdder(@RequestBody Adder adder) {
-        adderService.saveAdder(adder);
+    public Adder addAdder(@RequestBody Adder adder) {
+        return adderService.saveAdder(adder);
     }
 
     @GetMapping("/all")
@@ -35,15 +33,13 @@ public class AdderController {
         return adderService.findAll();
     }
 
-    // the below getMappings need to be changed to username because
-    // the below id is a technical id.
     @GetMapping("/get")
-    public Adder findAdder(@RequestParam("username") String username) {
-        return adderService.findAdder(username);
+    public Adder findAdderByUsername(@RequestParam("username") String username) {
+        return adderService.findByUsername(username);
     }
 
     @DeleteMapping("/delete")
-    public boolean deleteAdder(@RequestParam("username") String username) {
+    public boolean deleteAdderByUsername(@RequestParam("username") String username) {
         return adderService.deleteAdder(username);
     }
 }

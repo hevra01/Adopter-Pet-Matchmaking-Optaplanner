@@ -17,17 +17,19 @@ public class AdderService {
     @Autowired
     private AdderRepository adderRepository;
 
-    public void saveAdder(Adder adder) {
-        adderRepository.save(adder);
+    public Adder saveAdder(Adder adder) {
+        return adderRepository.save(adder);
     }
 
-    public Adder findAdder(String username) {
+    public Adder findByUsername(String username) {
         return adderRepository.findByUsername(username);
     }
 
     public boolean deleteAdder(String username) {
-        adderRepository.deleteByUsername(username);
-        return true;
+        if (adderRepository.deleteByUsername(username) > 0) {
+            return true;
+        }
+        return false;
     }
 
     public List<Adder> findAll() {

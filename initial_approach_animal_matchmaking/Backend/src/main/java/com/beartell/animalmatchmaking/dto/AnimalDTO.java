@@ -1,18 +1,12 @@
 package com.beartell.animalmatchmaking.dto;
 
-/*
-    Animal is the parent class whose children are Cat and Dog.
- */
 public class AnimalDTO {
 
-    private int id;
-
+    private String uuid;
     private String animalType; // Animal type can either be C for cat or D for dog for the current
                                // implementation
     private int expenses; // This will be specified in dollars.
-
-    private long adderID;
-
+    private String adderUsername;
     private int emotionalNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
                                // care.
     private int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
@@ -21,6 +15,14 @@ public class AnimalDTO {
     private int age;
     private boolean adopted;
     private boolean alive;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public boolean isAlive() {
         return alive;
@@ -41,14 +43,6 @@ public class AnimalDTO {
     public AnimalDTO() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getAnimalType() {
         return animalType;
     }
@@ -65,12 +59,12 @@ public class AnimalDTO {
         this.expenses = expenses;
     }
 
-    public long getAdderID() {
-        return adderID;
+    public String getAdderID() {
+        return adderUsername;
     }
 
-    public void setAdderID(long adderID) {
-        this.adderID = adderID;
+    public void setAdderID(String adderUsername) {
+        this.adderUsername = adderUsername;
     }
 
     public int getEmotionalNeed() {
@@ -103,6 +97,14 @@ public class AnimalDTO {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getAdderUsername() {
+        return adderUsername;
+    }
+
+    public void setAdderUsername(String adderUsername) {
+        this.adderUsername = adderUsername;
     }
 
 }

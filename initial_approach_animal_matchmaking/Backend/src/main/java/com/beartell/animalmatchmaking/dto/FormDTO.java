@@ -2,9 +2,7 @@ package com.beartell.animalmatchmaking.dto;
 
 public class FormDTO {
 
-    private int id;
-
-    private long adopterId;
+    private String adopterUsername;
     private int moneyWillingToSpendForPetPerMonth;
     private String petType;
     private int busyness; // this will be on a scale of 1 to 10. 10 implying the most busy.
@@ -14,10 +12,9 @@ public class FormDTO {
     public FormDTO() {
     }
 
-    public FormDTO(int id, int adopterId, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
+    public FormDTO(String adopterUsername, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
             int physicalActivityTimeDevote, int socialLevel) {
-        this.id = id;
-        this.adopterId = adopterId;
+        this.adopterUsername = adopterUsername;
         this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
         this.petType = petType;
         this.busyness = busyness;
@@ -25,20 +22,12 @@ public class FormDTO {
         this.socialLevel = socialLevel;
     }
 
-    public int getId() {
-        return id;
+    public String getAdopterUsername() {
+        return adopterUsername;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getAdopterId() {
-        return adopterId;
-    }
-
-    public void setAdopterId(int adopterId) {
-        this.adopterId = adopterId;
+    public void setAdopterUsername(String adopterUsername) {
+        this.adopterUsername = adopterUsername;
     }
 
     public int getMoneyWillingToSpendForPetPerMonth() {

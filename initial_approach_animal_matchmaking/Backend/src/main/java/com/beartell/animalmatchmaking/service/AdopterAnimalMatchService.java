@@ -1,14 +1,10 @@
 package com.beartell.animalmatchmaking.service;
 
 import com.beartell.animalmatchmaking.repository.AdopterRepository;
-import com.beartell.animalmatchmaking.repository.AnimalRepository;
-import com.beartell.animalmatchmaking.repository.FormRepository;
 import com.beartell.animalmatchmaking.scheduler.JobData;
 import com.beartell.animalmatchmaking.scheduler.ScheduledJob;
 import com.beartell.animalmatchmaking.solver.AnimalConstraintProvider;
 
-import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.api.score.buildin.simple.SimpleScore;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.SolverJob;
@@ -30,8 +26,6 @@ import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import javax.swing.text.rtf.RTFEditorKit;
-
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -48,50 +42,27 @@ import com.beartell.animalmatchmaking.dto.FormDTO;
 @Service
 public class AdopterAnimalMatchService {
 
-    // private static final Logger LOGGER =
-    // LoggerFactory.getLogger(AdopterAnimalMatchService.class);
-
-    // the adderService needs to be autowired with the repository so that it can
-    // call its methods.
     @Autowired
     private AdopterRepository adopterRepository;
 
     @Autowired
-    private AnimalRepository animalRepository;
+    private AnimalService animalService;
 
     @Autowired
-    private FormRepository formRepository;
+    private AdopterService adopterService;
 
     @Autowired
     private Scheduler quartzScheduler;
 
+    // @Autowired
     private SolverManager<AdopterPetPair, UUID> solverManager;
-
-    public ToIntBiFunction differenceInActivenessLevel() {
-
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math
-                .abs(x.getPhysicalActivityNeed() - y.getPhysicalActivityTimeDevote());
-        return i;
-    }
-
-    public ToIntBiFunction differenceInBusynessLevel() {
-
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math.abs(x.getEmotionalNeed() - y.getBusyness());
-        return i;
-    }
-
-    public ToIntBiFunction differenceInSocializingLevel() {
-
-        ToIntBiFunction<Animal, Form> i = (x, y) -> Math.abs(x.getShynessLevel() - y.getSocialLevel());
-        return i;
-    }
 
     // Finds the best match for the adopter.
     public AdopterPetPair moreAccurateMatch(Adopter adopter) {
         // represents an immutable universally unique identifier (UUID)
         UUID problemId = UUID.randomUUID();
 
-        AdopterPetPair problem = new AdopterPetPair(animalRepository.findAll(), adopter);
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll());
 
         // Submit the problem to start solving
         SolverJob<AdopterPetPair, UUID> solverJob = solverManager.solve(problemId, problem);
@@ -141,7 +112,7 @@ public class AdopterAnimalMatchService {
     }
 
     // this is problematic due to http timeouts!!
-    public void match(Animal animal) {
+    public AdopterPetPair match() {
         /*
          * Use one SolverFactory per application.
          * This is because a specific application has fixed Planning Entity,
@@ -173,9 +144,11 @@ public class AdopterAnimalMatchService {
         // AdopterPetPair problem = generateDemoData();
 
         Solver<AdopterPetPair> solver = solverFactory.buildSolver(); // builds the solving algorithm
-        // AdopterPetPair solution = solver.solve(problem); // solves the problem
 
-        // printTimetable(solution);
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll());
+
+        AdopterPetPair solution = solver.solve(problem); // solves the problem
+        return solution;
 
     }
 

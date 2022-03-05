@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name = "form")
@@ -14,11 +13,12 @@ public class Form {
     @GeneratedValue
     private int id;
 
+    @Column(unique = true)
+    private String adopterUsername;
+
     @OneToOne(mappedBy = "form")
     private Adopter adopter;
 
-    // Used for hard constraint and the country of the adopter will also be a hard
-    // constraint.
     @Column(name = "MoneySpentForPet", length = 5, nullable = false)
     private int moneyWillingToSpendForPetPerMonth;
 
@@ -38,14 +38,22 @@ public class Form {
     public Form() {
     }
 
-    public Form(int id, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
+    public Form(String adopterUsername, int moneyWillingToSpendForPetPerMonth, String petType, int busyness,
             int physicalActivityTimeDevote, int socialLevel) {
-        this.id = id;
+        this.adopterUsername = adopterUsername;
         this.moneyWillingToSpendForPetPerMonth = moneyWillingToSpendForPetPerMonth;
         this.petType = petType;
         this.busyness = busyness;
         this.physicalActivityTimeDevote = physicalActivityTimeDevote;
         this.socialLevel = socialLevel;
+    }
+
+    public String getAdopterUsername() {
+        return adopterUsername;
+    }
+
+    public void setAdopterUsername(String adopterUsername) {
+        this.adopterUsername = adopterUsername;
     }
 
     public int getId() {

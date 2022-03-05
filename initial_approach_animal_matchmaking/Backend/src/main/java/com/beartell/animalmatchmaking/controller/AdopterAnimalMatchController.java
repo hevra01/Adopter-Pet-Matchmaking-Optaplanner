@@ -1,19 +1,17 @@
 package com.beartell.animalmatchmaking.controller;
 
-import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-
 import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.AdopterPetPair;
-import com.beartell.animalmatchmaking.dto.FormDTO;
 import com.beartell.animalmatchmaking.repository.AnimalRepository;
 import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
+import com.beartell.animalmatchmaking.service.AdopterService;
 
-import org.optaplanner.core.api.solver.SolverJob;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /*
@@ -33,6 +31,9 @@ public class AdopterAnimalMatchController {
     @Autowired
     private AnimalRepository animalRepository;
 
+    @Autowired
+    private AdopterService adopterService;
+
     /*
      * AdopterPetPair is the @PlanningSolution which contains both
      * the @PlanningEntity and @PlanningVariable.
@@ -42,9 +43,21 @@ public class AdopterAnimalMatchController {
      * values assigned to it.
      */
 
-    @PostMapping("/findMatch") // this needs to be id/username.
-    public AdopterPetPair solve(@RequestBody Adopter adopter) {
+    // question: do we need to check if the adopter is already present or not?
+    // can't we assume that the adopter is already present since they are
+    // able to make the api call to solve.
+    @GetMapping("/findMatch")
+    public AdopterPetPair solve(@RequestParam("username") String username) {
+        Adopter adopter = adopterService.findByUsername(username);
+
         AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch(adopter);
+        return solution;
+    }
+
+    @GetMapping("/findMatch2")
+    public AdopterPetPair solve2() {
+
+        AdopterPetPair solution = adopterAnimalMatchService.match();
         return solution;
     }
 
