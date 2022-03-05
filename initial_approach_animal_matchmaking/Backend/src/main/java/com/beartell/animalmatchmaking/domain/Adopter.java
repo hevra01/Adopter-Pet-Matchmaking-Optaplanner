@@ -9,12 +9,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -33,6 +32,7 @@ public class Adopter extends User {
     @Column(name = "InMatcher", length = 10, nullable = false)
     private boolean inMatcher;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "adopter")
     private List<Animal> animals;
 
@@ -55,15 +55,6 @@ public class Adopter extends User {
     public void setForm(Form form) {
         this.form = form;
     }
-
-    /*
-     * We don't want to loss the data of the animals adopted by an adopter.
-     * We might need the data later on for analysis. For that reason, we are keeping
-     * the
-     * myAnimal attribute separetely with the animals list. animals being the pets
-     * already
-     * adopted by the adopter. Whereas, myAnimal being the pet to be matched now.
-     */
 
     public Adopter() {
     }
