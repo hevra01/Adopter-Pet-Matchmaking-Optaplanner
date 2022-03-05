@@ -7,6 +7,7 @@ import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
 import com.beartell.animalmatchmaking.service.AdopterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +51,13 @@ public class AdopterAnimalMatchController {
         Adopter adopter = adopterService.findByUsername(username);
 
         AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch(adopter);
+        return solution;
+    }
+
+    @GetMapping("/findMatch2")
+    public AdopterPetPair solve2() {
+
+        AdopterPetPair solution = adopterAnimalMatchService.match();
         return solution;
     }
 
