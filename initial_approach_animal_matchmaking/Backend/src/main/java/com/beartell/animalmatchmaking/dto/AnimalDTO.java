@@ -1,8 +1,5 @@
 package com.beartell.animalmatchmaking.dto;
 
-/*
-    Animal is the parent class whose children are Cat and Dog.
- */
 public class AnimalDTO {
 
     private String uuid;

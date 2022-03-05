@@ -2,7 +2,7 @@ package com.beartell.animalmatchmaking.dto;
 
 public class FormDTO {
 
-    String adopterUsername;
+    private String adopterUsername;
     private int moneyWillingToSpendForPetPerMonth;
     private String petType;
     private int busyness; // this will be on a scale of 1 to 10. 10 implying the most busy.

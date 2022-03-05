@@ -13,15 +13,12 @@ public class Form {
     @GeneratedValue
     private int id;
 
-    @Column(name = "AdopterUsername", length = 50, nullable = false, unique = true)
+    @Column(unique = true)
     private String adopterUsername;
 
-    // A form can be found by it adopter. It is a one to one relation.
     @OneToOne(mappedBy = "form")
     private Adopter adopter;
 
-    // Used for hard constraint and the country of the adopter will also be a hard
-    // constraint.
     @Column(name = "MoneySpentForPet", length = 5, nullable = false)
     private int moneyWillingToSpendForPetPerMonth;
 

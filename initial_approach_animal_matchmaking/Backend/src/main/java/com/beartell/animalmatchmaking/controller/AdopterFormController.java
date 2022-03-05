@@ -23,7 +23,7 @@ public class AdopterFormController {
     }
 
     @PatchMapping("/update")
-    public boolean updateForm(FormDTO formDTO) {
+    public boolean updateForm(@RequestBody FormDTO formDTO) {
         return adopterFormService.updateForm(formDTO);
     }
 }

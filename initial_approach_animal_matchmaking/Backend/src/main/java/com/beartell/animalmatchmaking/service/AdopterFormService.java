@@ -43,6 +43,7 @@ public class AdopterFormService {
         // updating its form, logically, the user should already exist.
 
         Form form = formRepository.findByAdopterUsername(formDTO.getAdopterUsername());
+        String name = formDTO.getAdopterUsername();
         form.setBusyness(formDTO.getBusyness());
         form.setMoneyWillingToSpendForPetPerMonth(formDTO.getMoneyWillingToSpendForPetPerMonth());
         form.setPetType(formDTO.getPetType());
