@@ -9,6 +9,7 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;
 import org.optaplanner.core.api.score.stream.ConstraintProvider;
+import static org.optaplanner.core.api.score.stream.Joiners.equal;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -41,6 +42,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 locationConstraint(constraintFactory),
                                 animalPresence(constraintFactory),
                                 animalAdoptionStatus(constraintFactory),
+                                sameAnimalAssignedProblem(constraintFactory),
 
                                 // Soft constraints
                                 activenessConstraint(constraintFactory),
@@ -79,6 +81,14 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 return constraintFactory.forEach(Animal.class)
                                 .filter(animal -> animal.isAdopted() == true)
                                 .penalize("Animal already adopted", HardSoftScore.ONE_HARD);
+        }
+
+        private Constraint sameAnimalAssignedProblem(ConstraintFactory constraintFactory) {
+                // The animal to be matched shouldn't be one which is already adopted.
+                // In other words, animal.adopted == false
+                return constraintFactory.forEachUniquePair(Animal.class,
+                                equal(Animal::getAdopterUsername))
+                                .penalize("Can not match animal to same adopter", HardSoftScore.ONE_HARD);
         }
 
         private Constraint locationConstraint(ConstraintFactory constraintFactory) {

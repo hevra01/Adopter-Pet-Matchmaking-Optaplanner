@@ -26,7 +26,6 @@ public class Adopter extends User {
     @PlanningId
     private Long planningId;
 
-    @PlanningVariable(valueRangeProviderRefs = "AnimalList")
     @Transient
     private Animal myAnimal;
 
@@ -82,6 +81,7 @@ public class Adopter extends User {
         this.planningId = planningId;
     }
 
+    @PlanningVariable(valueRangeProviderRefs = "AnimalList")
     public Animal getMyAnimal() {
         return myAnimal;
     }
