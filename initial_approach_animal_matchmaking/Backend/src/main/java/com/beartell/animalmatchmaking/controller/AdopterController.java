@@ -31,6 +31,11 @@ public class AdopterController {
         return adopterService.findAll();
     }
 
+    @GetMapping("/allInMatcher")
+    public List<Adopter> findAllInMatcher() {
+        return adopterService.findAllInMatcher();
+    }
+
     /*
      * The below two functions will be used for scheduling.
      * If the adopter wants to be in the scheduler list, then they

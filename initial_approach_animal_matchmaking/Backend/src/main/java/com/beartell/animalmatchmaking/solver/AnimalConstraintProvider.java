@@ -1,7 +1,5 @@
 package com.beartell.animalmatchmaking.solver;
 
-import com.beartell.animalmatchmaking.service.AdopterAnimalMatchService;
-
 import java.util.function.ToIntBiFunction;
 
 import com.beartell.animalmatchmaking.domain.Adopter;
@@ -11,14 +9,10 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.api.score.stream.Constraint;
 import org.optaplanner.core.api.score.stream.ConstraintFactory;
 import org.optaplanner.core.api.score.stream.ConstraintProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalConstraintProvider implements ConstraintProvider {
-
-        // @Autowired
-        // private AdopterAnimalMatchService adopterAnimalMatchService;
 
         private ToIntBiFunction differenceInActivenessLevel() {
                 ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
@@ -60,7 +54,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The animal to be matched should be of the type specified by the user.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> b.getForm() != null || a.getAnimalType() != b.getForm().getPetType())
+                                .filter((a, b) -> a.getAnimalType() != b.getForm().getPetType())
                                 .penalize("Not the correct animal type", HardSoftScore.ONE_HARD);
         }
 
@@ -75,8 +69,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The expenses of the animal to be matched should be affordable by the adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> b.getForm() != null
-                                                || a.getExpenses() > b.getForm().getMoneyWillingToSpendForPetPerMonth())
+                                .filter((a, b) -> a.getExpenses() > b.getForm().getMoneyWillingToSpendForPetPerMonth())
                                 .penalize("Adopter can not afford the expenses", HardSoftScore.ONE_HARD);
         }
 
@@ -101,7 +94,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // The activeness of the animal should be in similar to its future adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> b.getForm() != null || a.getPhysicalActivityNeed() > b.getForm()
+                                .filter((a, b) -> a.getPhysicalActivityNeed() > b.getForm()
                                                 .getPhysicalActivityTimeDevote())
                                 .penalize("Activeness level not matching", HardSoftScore.ONE_SOFT,
                                                 differenceInActivenessLevel());
@@ -112,8 +105,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // its future adopter.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> b.getForm() != null
-                                                || a.getEmotionalIndependence() < b.getForm().getBusyness())
+                                .filter((a, b) -> a.getEmotionalIndependence() < b.getForm().getBusyness())
                                 .penalize("Emotional need not being satisfied", HardSoftScore.ONE_SOFT,
                                                 differenceInBusynessLevel());
         }
@@ -123,8 +115,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                 // adopter is.
                 return constraintFactory.forEach(Animal.class)
                                 .join(Adopter.class)
-                                .filter((a, b) -> b.getForm() != null
-                                                || a.getExtroversionLevel() < b.getForm().getSocialLevel())
+                                .filter((a, b) -> a.getExtroversionLevel() < b.getForm().getSocialLevel())
                                 .penalize("Socializing level not matching", HardSoftScore.ONE_SOFT,
                                                 differenceInSocializingLevel());
         }

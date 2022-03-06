@@ -43,6 +43,17 @@
 			<artifactId>optaplanner-core</artifactId>
 			<version>8.16.0.Final</version>
 		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.optaplanner/optaplanner-benchmark -->
+		<dependency>
+			<groupId>org.optaplanner</groupId>
+			<artifactId>optaplanner-benchmark</artifactId>
+			<version>8.16.0.Final</version>
+		</dependency>
+
+
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
 		<dependency>
 			<groupId>org.springframework.data</groupId>

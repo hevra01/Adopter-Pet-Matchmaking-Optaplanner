@@ -8,8 +8,6 @@ import com.beartell.animalmatchmaking.service.AdopterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,14 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 */
 
 @RestController
-@RequestMapping("/api/AdopterPetPair")
+@RequestMapping("/api/adopterPetPair")
 public class AdopterAnimalMatchController {
 
     @Autowired
     private AdopterAnimalMatchService adopterAnimalMatchService;
-
-    @Autowired
-    private AnimalRepository animalRepository;
 
     @Autowired
     private AdopterService adopterService;
@@ -42,10 +37,6 @@ public class AdopterAnimalMatchController {
      * However, after sending it to the solve function, the Planning Entity will get
      * values assigned to it.
      */
-
-    // question: do we need to check if the adopter is already present or not?
-    // can't we assume that the adopter is already present since they are
-    // able to make the api call to solve.
     @GetMapping("/findMatch")
     public AdopterPetPair solve(@RequestParam("username") String username) {
         Adopter adopter = adopterService.findByUsername(username);

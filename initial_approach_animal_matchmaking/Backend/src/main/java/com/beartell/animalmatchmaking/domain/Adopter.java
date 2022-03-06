@@ -22,6 +22,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 @PlanningEntity
 public class Adopter extends User {
 
+    @Column(nullable = false, unique = true)
     @PlanningId
     private Long planningId;
 

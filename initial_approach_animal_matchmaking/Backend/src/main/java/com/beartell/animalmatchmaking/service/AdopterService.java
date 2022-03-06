@@ -60,16 +60,16 @@ public class AdopterService {
         return false;
     }
 
-    public void createForm(Form form) {
-
-    }
-
     public Adopter findByUsername(String username) {
         return adopterRepository.findByUsername(username);
     }
 
     public List<Adopter> findAll() {
         return adopterRepository.findAll();
+    }
+
+    public List<Adopter> findAllInMatcher() {
+        return adopterRepository.findAllInMatcher();
     }
 
 }

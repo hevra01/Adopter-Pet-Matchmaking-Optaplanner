@@ -90,49 +90,8 @@ public class AdopterAnimalMatchService {
         adopterRepository.save(adopter); // update the adopter after the addition of the animal
     }
 
-    public void scheduler(JobData data) {
-        String jobName = data.getJobName();
-        String jobGroup = data.getJobGroup();
-
-        int counter = data.getCounter();
-
-        // duration between two jobs
-        int gapDuration = data.getGapDuration();
-
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(data.getStarTime(), ZoneId.of("America/New_York"));
-
-        JobDataMap dataMap = new JobDataMap();
-        dataMap.put("test", "this is just for demo");
-
-        JobDetail detail = JobBuilder.newJob(ScheduledJob.class).withIdentity(jobName, jobGroup).usingJobData(dataMap)
-                .build();
-
-        SimpleTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName, jobGroup)
-                .startAt(Date.from(zonedDateTime.toInstant()))
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                        .withIntervalInHours(gapDuration).withRepeatCount(counter))
-                .build();
-    }
-
     // this is problematic due to http timeouts!!
     public AdopterPetPair match() {
-        /*
-         * Use one SolverFactory per application.
-         * This is because a specific application has fixed Planning Entity,
-         * fixed Planning Variables, fixed constraints. Hence, fixed solution.
-         */
-
-        /*
-         * SolverFactory has a generic parameter called Solution.
-         * That is exactly our Planning Solution. It is generic because
-         * different problems can have different Planning Solution.
-         * Implemented for different data types.
-         */
-
-        /*
-         * Both a Solver and a SolverFactory have a generic type called Solution_,
-         * which is the class representing a planning problem and solution.
-         */
 
         SolverFactory<AdopterPetPair> solverFactory = SolverFactory.create(new SolverConfig()
                 .withSolutionClass(AdopterPetPair.class)
@@ -141,16 +100,17 @@ public class AdopterAnimalMatchService {
 
                 // The solver runs only for 5 seconds on this small dataset.
                 // It's recommended to run for at least 5 minutes ("5m") otherwise.
-                .withTerminationSpentLimit(Duration.ofSeconds(10)));
-
-        // Load the problem
-        // AdopterPetPair problem = generateDemoData();
-
-        Solver<AdopterPetPair> solver = solverFactory.buildSolver(); // builds the solving algorithm
+                .withTerminationSpentLimit(Duration.ofMinutes(2)));
 
         HardSoftScore score = HardSoftScore.ZERO;
 
-        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAll(), score);
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAllInMatcher(), score);
+
+        // SolverFactory<AdopterPetPair> solverFactory =
+        // SolverFactory.createFromXmlResource(
+        // "org/optaplanner/examples/nqueens/solver/nqueensSolverConfig.xml");
+
+        Solver<AdopterPetPair> solver = solverFactory.buildSolver();
 
         AdopterPetPair solution = solver.solve(problem); // solves the problem
         return solution;
