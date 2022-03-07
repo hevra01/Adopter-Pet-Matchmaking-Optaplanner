@@ -12,11 +12,8 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 @PlanningSolution
 public class AdopterPetPair {
 
-    @ValueRangeProvider(id = "AnimalList")
-    @ProblemFactCollectionProperty
     private List<Animal> animals;
 
-    @PlanningEntityCollectionProperty
     private List<Adopter> adoptersInMatcher;
 
     @PlanningScore
@@ -25,12 +22,13 @@ public class AdopterPetPair {
     public AdopterPetPair() {
     }
 
-    public AdopterPetPair(List<Animal> animals, List<Adopter> adoptersInMatcher, HardSoftScore score) {
+    public AdopterPetPair(List<Animal> animals, List<Adopter> adoptersInMatcher) {
         this.animals = animals;
         this.adoptersInMatcher = adoptersInMatcher;
-        this.score = score;
     }
 
+    @ValueRangeProvider(id = "AnimalList")
+    @ProblemFactCollectionProperty
     public List<Animal> getAnimals() {
         return animals;
     }
@@ -39,6 +37,7 @@ public class AdopterPetPair {
         this.animals = animals;
     }
 
+    @PlanningEntityCollectionProperty
     public List<Adopter> getAdoptersInMatcher() {
         return adoptersInMatcher;
     }

@@ -48,7 +48,6 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 activenessConstraint(constraintFactory),
                                 busynessConstraint(constraintFactory),
                                 socializingConstraint(constraintFactory)
-
                 };
         }
 
@@ -86,8 +85,8 @@ public class AnimalConstraintProvider implements ConstraintProvider {
         private Constraint sameAnimalAssignedProblem(ConstraintFactory constraintFactory) {
                 // The animal to be matched shouldn't be one which is already adopted.
                 // In other words, animal.adopted == false
-                return constraintFactory.forEachUniquePair(Animal.class,
-                                equal(Animal::getAdopterUsername))
+                return constraintFactory.forEachUniquePair(Adopter.class,
+                                equal(Adopter::getMyAnimalUuid))
                                 .penalize("Can not match animal to same adopter", HardSoftScore.ONE_HARD);
         }
 

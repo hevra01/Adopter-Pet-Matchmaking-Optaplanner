@@ -140,10 +140,6 @@ public class Animal {
         return adopter;
     }
 
-    public String getAdopterUsername() {
-        return adopter.getUsername();
-    }
-
     public void setAdopter(Adopter adopter) {
         this.adopter = adopter;
     }

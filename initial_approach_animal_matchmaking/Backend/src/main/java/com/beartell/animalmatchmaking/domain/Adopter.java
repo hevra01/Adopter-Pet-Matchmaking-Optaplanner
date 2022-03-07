@@ -86,6 +86,10 @@ public class Adopter extends User {
         return myAnimal;
     }
 
+    public String getMyAnimalUuid() {
+        return myAnimal.getUuid();
+    }
+
     public void setMyAnimal(Animal myAnimal) {
         this.myAnimal = myAnimal;
     }

@@ -38,10 +38,9 @@ public class AdopterAnimalMatchController {
      * values assigned to it.
      */
     @GetMapping("/findMatch")
-    public AdopterPetPair solve(@RequestParam("username") String username) {
-        Adopter adopter = adopterService.findByUsername(username);
+    public AdopterPetPair solve() {
 
-        AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch(adopter);
+        AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch();
         return solution;
     }
 
