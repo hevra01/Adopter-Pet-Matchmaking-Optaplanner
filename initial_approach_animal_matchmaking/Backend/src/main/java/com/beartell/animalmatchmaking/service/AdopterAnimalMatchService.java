@@ -35,7 +35,7 @@ public class AdopterAnimalMatchService {
     private SolverService solverService;
 
     // Finds the best match for the adopter.
-    public AdopterPetPair moreAccurateMatch() {
+    public AdopterPetPair match1() {
         UUID problemId = UUID.randomUUID();
 
         AdopterPetPair solution = new AdopterPetPair(animalService.findAll(), adopterService.findAllInMatcher());
@@ -52,7 +52,7 @@ public class AdopterAnimalMatchService {
     }
 
     // this is problematic due to http timeouts!!
-    public AdopterPetPair match() {
+    public AdopterPetPair match2() {
 
         SolverFactory<AdopterPetPair> solverFactory = SolverFactory.create(new SolverConfig()
                 .withSolutionClass(AdopterPetPair.class)

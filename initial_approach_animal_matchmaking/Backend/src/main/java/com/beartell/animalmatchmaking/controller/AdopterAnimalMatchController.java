@@ -26,9 +26,6 @@ public class AdopterAnimalMatchController {
     @Autowired
     private AdopterAnimalMatchService adopterAnimalMatchService;
 
-    @Autowired
-    private AdopterService adopterService;
-
     /*
      * AdopterPetPair is the @PlanningSolution which contains both
      * the @PlanningEntity and @PlanningVariable.
@@ -37,17 +34,20 @@ public class AdopterAnimalMatchController {
      * However, after sending it to the solve function, the Planning Entity will get
      * values assigned to it.
      */
-    @GetMapping("/findMatch")
+
+    // Now, this is an API; however, after completing it, it needs to be a scheduled
+    // task.
+    @GetMapping("/findMatch1")
     public AdopterPetPair solve() {
 
-        AdopterPetPair solution = adopterAnimalMatchService.moreAccurateMatch();
+        AdopterPetPair solution = adopterAnimalMatchService.match1();
         return solution;
     }
 
     @GetMapping("/findMatch2")
     public AdopterPetPair solve2() {
 
-        AdopterPetPair solution = adopterAnimalMatchService.match();
+        AdopterPetPair solution = adopterAnimalMatchService.match2();
         return solution;
     }
 

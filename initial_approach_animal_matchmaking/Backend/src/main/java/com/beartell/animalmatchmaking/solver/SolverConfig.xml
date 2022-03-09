@@ -10,14 +10,23 @@
     <constraintProviderClass>com.beartell.animalmatchmaking.solver.AnimalConstraintProvider</constraintProviderClass>
   </scoreDirectorFactory>
 
-  <!-- Configure the optimization algorithms (optional) 
+
+  <!-- Configure the optimization algorithms (optional) -->
   <termination>
-    ...
+    <secondsSpentLimit>60</secondsSpentLimit>
   </termination>
+
   <constructionHeuristic>
-    ...
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+
+    <!--forager-->
+
+      <entitySorterManner>DECREASING_DIFFICULTY_IF_AVAILABLE</entitySorterManner>
+
+    <!--/forager-->
   </constructionHeuristic>
+
   <localSearch>
     ...
-  </localSearch> -->
+  </localSearch>
 </solver> 

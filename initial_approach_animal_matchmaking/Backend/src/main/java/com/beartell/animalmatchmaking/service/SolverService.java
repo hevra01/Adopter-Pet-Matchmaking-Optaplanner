@@ -2,9 +2,7 @@ package com.beartell.animalmatchmaking.service;
 
 import org.optaplanner.core.api.solver.SolverManager;
 import org.optaplanner.core.config.solver.SolverConfig;
-import org.optaplanner.core.config.solver.SolverManagerConfig;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.optaplanner.core.config.solver.termination.TerminationConfig;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -14,14 +12,22 @@ import com.beartell.animalmatchmaking.domain.Adopter;
 import com.beartell.animalmatchmaking.domain.AdopterPetPair;
 import com.beartell.animalmatchmaking.solver.AnimalConstraintProvider;
 
-import org.optaplanner.core.api.solver.SolverFactory;
-
 @Service
 public class SolverService {
 
     public SolverConfig solverConfig2() {
         SolverConfig solverConfig = SolverConfig
-                .createFromXmlResource("com/beartell/animalmatchmaking/solver/SolverConfig.xml");
+                .createFromXmlResource("com/beartell/animalmatchmaking/solver/SolverConfig.xml",
+                        getClass().getClassLoader());
+
+        long secondsSpentLimit2 = 5;
+
+        TerminationConfig terminationConfig = new TerminationConfig();
+
+        terminationConfig.setSecondsSpentLimit(secondsSpentLimit2);
+
+        solverConfig.setTerminationConfig(terminationConfig);
+
         return solverConfig;
     }
 
@@ -37,6 +43,6 @@ public class SolverService {
     }
 
     public SolverManager<AdopterPetPair, UUID> solverManager() {
-        return SolverManager.create(solverConfig2(), new SolverManagerConfig());
+        return SolverManager.create(solverConfig2());
     }
 }
