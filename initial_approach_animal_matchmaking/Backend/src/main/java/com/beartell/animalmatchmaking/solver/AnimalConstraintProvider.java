@@ -15,19 +15,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnimalConstraintProvider implements ConstraintProvider {
 
-        private ToIntBiFunction differenceInActivenessLevel() {
+        private ToIntBiFunction<Animal, Adopter> differenceInActivenessLevel() {
                 ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
                                 .abs(x.getPhysicalActivityNeed() - y.getForm().getPhysicalActivityTimeDevote());
                 return i;
         }
 
-        private ToIntBiFunction differenceInBusynessLevel() {
+        private ToIntBiFunction<Animal, Adopter> differenceInBusynessLevel() {
                 ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
                                 .abs(x.getEmotionalIndependence() - y.getForm().getBusyness());
                 return i;
         }
 
-        private ToIntBiFunction differenceInSocializingLevel() {
+        private ToIntBiFunction<Animal, Adopter> differenceInSocializingLevel() {
                 ToIntBiFunction<Animal, Adopter> i = (x, y) -> Math
                                 .abs(x.getExtroversionLevel() - y.getForm().getSocialLevel());
                 return i;

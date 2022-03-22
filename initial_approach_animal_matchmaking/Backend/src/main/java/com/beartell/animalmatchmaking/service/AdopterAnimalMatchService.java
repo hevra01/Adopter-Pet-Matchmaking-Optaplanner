@@ -38,17 +38,17 @@ public class AdopterAnimalMatchService {
     public AdopterPetPair match1() {
         UUID problemId = UUID.randomUUID();
 
-        AdopterPetPair solution = new AdopterPetPair(animalService.findAll(), adopterService.findAllInMatcher());
+        AdopterPetPair problem = new AdopterPetPair(animalService.findAll(), adopterService.findAllInMatcher());
 
-        SolverJob<AdopterPetPair, UUID> solverJob = solverService.solverManager().solve(problemId, solution);
+        SolverJob<AdopterPetPair, UUID> solverJob = solverService.solverManager().solve(problemId, problem);
 
         // Wait until the solving ends
         try {
-            solution = solverJob.getFinalBestSolution();
+            AdopterPetPair solution = solverJob.getFinalBestSolution();
+            return solution;
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            return problem;
         }
-        return solution;
     }
 
     // this is problematic due to http timeouts!!

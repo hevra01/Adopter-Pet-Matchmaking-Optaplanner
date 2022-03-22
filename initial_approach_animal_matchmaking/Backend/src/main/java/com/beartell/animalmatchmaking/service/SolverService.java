@@ -20,7 +20,7 @@ public class SolverService {
                 .createFromXmlResource("com/beartell/animalmatchmaking/solver/SolverConfig.xml",
                         getClass().getClassLoader());
 
-        long secondsSpentLimit2 = 5;
+        long secondsSpentLimit2 = 25;
 
         TerminationConfig terminationConfig = new TerminationConfig();
 

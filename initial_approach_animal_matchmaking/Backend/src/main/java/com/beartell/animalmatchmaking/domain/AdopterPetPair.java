@@ -33,13 +33,13 @@ public class AdopterPetPair {
         return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
-        this.animals = animals;
-    }
-
     @PlanningEntityCollectionProperty
     public List<Adopter> getAdoptersInMatcher() {
         return adoptersInMatcher;
+    }
+
+    public void setAnimals(List<Animal> animals) {
+        this.animals = animals;
     }
 
     public void setAdoptersInMatcher(List<Adopter> adoptersInMatcher) {
