@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
@@ -32,7 +33,7 @@ public class Adopter extends User {
     @Column(name = "InMatcher", length = 10, nullable = false)
     private boolean inMatcher;
 
-    @JsonBackReference
+    @JsonManagedReference(value = "adopter")
     @OneToMany(mappedBy = "adopter")
     private List<Animal> animals;
 
@@ -46,6 +47,12 @@ public class Adopter extends User {
 
     public void setInMatcher(boolean inMatcher) {
         this.inMatcher = inMatcher;
+    }
+
+    @Override
+    public String toString() {
+        return "Adopter [animals=" + animals + ", form=" + form + ", inMatcher=" + inMatcher + ", myAnimal=" + myAnimal
+                + ", planningId=" + planningId + "]";
     }
 
     public Form getForm() {

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /*
     User is the parent class of Adopter and Adder.
  */
@@ -20,24 +22,31 @@ public class User {
     @GeneratedValue
     private Long id;
 
+    @JsonProperty("name")
     @Column(name = "Name", length = 50, nullable = false)
     private String name;
 
+    @JsonProperty("surname")
     @Column(name = "Surname", length = 50, nullable = false)
     private String surname;
 
+    @JsonProperty("username")
     @Column(name = "Username", length = 50, nullable = false, unique = true)
     private String username;
 
+    @JsonProperty("emailAddress")
     @Column(name = "EmailAddress", length = 50, nullable = false)
     private String emailAddress;
 
+    @JsonProperty("phoneNumber")
     @Column(name = "PhoneNumber", length = 50, nullable = false)
     private String phoneNumber;
 
+    @JsonProperty("country")
     @Column(name = "Country", length = 50, nullable = false)
     private String country;
 
+    @JsonProperty("city")
     @Column(name = "City", length = 50, nullable = false)
     private String city;
 

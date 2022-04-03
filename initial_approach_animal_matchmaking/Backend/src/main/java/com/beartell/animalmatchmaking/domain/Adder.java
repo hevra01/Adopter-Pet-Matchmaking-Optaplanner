@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Adder extends User {
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "adder")
     @OneToMany(mappedBy = "adder")
     private List<Animal> animals = new ArrayList<Animal>();
 
@@ -25,6 +25,11 @@ public class Adder extends User {
 
     public List<Animal> getAnimals() {
         return animals;
+    }
+
+    @Override
+    public String toString() {
+        return "Adder [animals=" + animals + "]";
     }
 
     public void setAnimals(List<Animal> animals) {

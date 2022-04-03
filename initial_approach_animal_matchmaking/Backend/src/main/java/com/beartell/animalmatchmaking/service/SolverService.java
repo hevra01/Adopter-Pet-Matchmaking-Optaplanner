@@ -20,7 +20,7 @@ public class SolverService {
                 .createFromXmlResource("com/beartell/animalmatchmaking/solver/SolverConfig.xml",
                         getClass().getClassLoader());
 
-        long secondsSpentLimit2 = 25;
+        long secondsSpentLimit2 = 40;
 
         TerminationConfig terminationConfig = new TerminationConfig();
 
@@ -29,6 +29,10 @@ public class SolverService {
         solverConfig.setTerminationConfig(terminationConfig);
 
         return solverConfig;
+    }
+
+    public SolverManager<AdopterPetPair, UUID> solverManager() {
+        return SolverManager.create(solverConfig2());
     }
 
     public SolverConfig solverConfig() {
@@ -42,7 +46,4 @@ public class SolverService {
                 .withTerminationSpentLimit(Duration.ofSeconds(5));
     }
 
-    public SolverManager<AdopterPetPair, UUID> solverManager() {
-        return SolverManager.create(solverConfig2());
-    }
 }

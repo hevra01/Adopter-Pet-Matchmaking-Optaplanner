@@ -25,6 +25,14 @@ public class Form {
     @Column(name = "PetType", length = 50, nullable = false)
     private String petType;
 
+    @Override
+    public String toString() {
+        return "Form [adopter=" + adopter + ", adopterUsername=" + adopterUsername + ", busyness=" + busyness + ", id="
+                + id + ", moneyWillingToSpendForPetPerMonth=" + moneyWillingToSpendForPetPerMonth + ", petType="
+                + petType + ", physicalActivityTimeDevote=" + physicalActivityTimeDevote + ", socialLevel="
+                + socialLevel + "]";
+    }
+
     // Used for soft constraint.
     @Column(name = "Busyness", length = 2, nullable = false)
     private int busyness; // this will be on a scale of 1 to 10. 10 implying the most busy.

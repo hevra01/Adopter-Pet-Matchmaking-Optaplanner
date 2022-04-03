@@ -23,11 +23,11 @@ public class Animal {
     @Column(unique = true)
     private String uuid;
 
-    @JsonBackReference
+    @JsonBackReference(value = "adder")
     @ManyToOne
     private Adder adder;
 
-    @JsonBackReference
+    @JsonBackReference(value = "adopter")
     @ManyToOne
     private Adopter adopter;
 
@@ -40,7 +40,7 @@ public class Animal {
 
     @Column(name = "EmotionalNeed", length = 50, nullable = false)
     private int emotionalIndependence; // This will be on a scale of 1 to 10. 10 implying needing a lot of emotional
-    // care.
+                                       // care.
 
     @Column(name = "PhysicalActivityNeed", length = 50, nullable = false)
     private int physicalActivityNeed; // This will be on a scale of 1 to 10. 10 implying needing a lot of physical
@@ -146,6 +146,14 @@ public class Animal {
 
     public boolean isAdopted() {
         return adopted;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal [adder=" + adder + ", adopted=" + adopted + ", adopter=" + adopter + ", age=" + age + ", alive="
+                + alive + ", animalType=" + animalType + ", emotionalIndependence=" + emotionalIndependence
+                + ", expenses=" + expenses + ", extroversionLevel=" + extroversionLevel + ", id=" + id
+                + ", physicalActivityNeed=" + physicalActivityNeed + ", uuid=" + uuid + "]";
     }
 
     public void setAdopted(boolean adopted) {

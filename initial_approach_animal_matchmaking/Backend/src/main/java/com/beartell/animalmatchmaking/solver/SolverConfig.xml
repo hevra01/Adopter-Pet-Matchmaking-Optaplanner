@@ -21,14 +21,6 @@
     <minutesSpentLimit>120</minutesSpentLimit>
   </termination>
 
-  <!--constructionHeuristic>
-    <constructionHeuristicType>ALLOCATE_ENTITY_FROM_QUEUE</constructionHeuristicType>
-  </constructionHeuristic-->
-
-  <!--exhaustiveSearch>
-    <exhaustiveSearchType>BRUTE_FORCE</exhaustiveSearchType>
-  </exhaustiveSearch--> 
-
   <constructionHeuristic>
     <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
 
@@ -38,6 +30,8 @@
 
   <localSearch>
 
+    <changeMoveSelector/>
+    
     <acceptor>
       <entityTabuSize>7</entityTabuSize>
     </acceptor>
