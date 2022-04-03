@@ -42,7 +42,7 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 locationConstraint(constraintFactory),
                                 animalPresence(constraintFactory),
                                 animalAdoptionStatus(constraintFactory),
-                                sameAnimalAssignedProblem(constraintFactory),
+                                // sameAnimalAssignedProblem(constraintFactory),
 
                                 // Soft constraints
                                 activenessConstraint(constraintFactory),
@@ -82,13 +82,16 @@ public class AnimalConstraintProvider implements ConstraintProvider {
                                 .penalize("Animal already adopted", HardSoftScore.ONE_HARD);
         }
 
-        private Constraint sameAnimalAssignedProblem(ConstraintFactory constraintFactory) {
-                // The animal to be matched shouldn't be one which is already adopted.
-                // In other words, animal.adopted == false
-                return constraintFactory.forEachUniquePair(Adopter.class,
-                                equal(Adopter::getMyAnimalUuid))
-                                .penalize("Can not match animal to same adopter", HardSoftScore.ONE_HARD);
-        }
+        /*
+         * private Constraint sameAnimalAssignedProblem(ConstraintFactory
+         * constraintFactory) {
+         * // The animal to be matched shouldn't be one which is already adopted.
+         * // In other words, animal.adopted == false
+         * return constraintFactory.forEachUniquePair(Adopter.class,
+         * equal(Adopter::getMyAnimalUuid))
+         * .penalize("Can not match animal to same adopter", HardSoftScore.ONE_HARD);
+         * }
+         */
 
         private Constraint locationConstraint(ConstraintFactory constraintFactory) {
                 // The animal to be matched should be in the same country as the adopter.

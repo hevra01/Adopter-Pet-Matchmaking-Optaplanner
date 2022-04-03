@@ -1,0 +1,44 @@
+2022-04-03 22:37:09,552 INFO o.s.b.StartupInfoLogger [main] Starting AnimalMatchmakingApplication using Java 11.0.11 on Aberna with PID 26820 (D:\Desktop\Internship\common_workplace\yago\initial_approach_animal_matchmaking\Backend\target\classes started by hevra in D:\Desktop\Internship\common_workplace\yago)
+2022-04-03 22:37:09,577 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-04-03 22:37:11,974 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-04-03 22:37:12,203 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 184 ms. Found 4 JPA repository interfaces.
+2022-04-03 22:37:14,379 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-04-03 22:37:14,420 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-04-03 22:37:14,422 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2022-04-03 22:37:14,423 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-04-03 22:37:14,661 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-04-03 22:37:14,661 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 4944 ms
+2022-04-03 22:37:14,919 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2022-04-03 22:37:14,952 WARN c.z.h.u.DriverDataSource [main] Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2022-04-03 22:37:15,512 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-04-03 22:37:15,864 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-04-03 22:37:16,100 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-04-03 22:37:16,550 INFO o.h.a.c.r.j.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-04-03 22:37:16,789 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-04-03 22:37:18,277 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-04-03 22:37:18,288 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-04-03 22:37:19,137 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-03 22:37:19,892 WARN o.s.b.a.f.FreeMarkerAutoConfiguration [main] Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2022-04-03 22:37:20,029 INFO o.q.i.StdSchedulerFactory [main] Using default implementation for ThreadExecutor
+2022-04-03 22:37:20,057 INFO o.q.c.SchedulerSignalerImpl [main] Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2022-04-03 22:37:20,059 INFO o.q.c.QuartzScheduler [main] Quartz Scheduler v.2.3.2 created.
+2022-04-03 22:37:20,066 INFO o.q.i.j.JobStoreSupport [main] Using db table-based data access locking (synchronization).
+2022-04-03 22:37:20,084 INFO o.q.i.j.JobStoreCMT [main] JobStoreCMT initialized.
+2022-04-03 22:37:20,087 INFO o.q.c.QuartzScheduler [main] Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 1 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is not clustered.
+
+2022-04-03 22:37:20,099 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2022-04-03 22:37:20,102 INFO o.q.i.StdSchedulerFactory [main] Quartz scheduler version: 2.3.2
+2022-04-03 22:37:20,104 INFO o.q.c.QuartzScheduler [main] JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4e7b89b6
+2022-04-03 22:37:20,218 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-04-03 22:37:20,277 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-04-03 22:37:20,326 INFO o.s.b.StartupInfoLogger [main] Started AnimalMatchmakingApplication in 12.083 seconds (JVM running for 14.427)
+2022-04-03 22:37:25,245 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-04-03 22:37:25,256 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2022-04-03 22:37:25,261 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 3 ms
+2022-04-03 22:37:38,616 INFO o.o.c.i.s.DefaultSolver [pool-3-thread-1] Solving started: time spent (401), best score (-4init/-6hard/0soft), environment mode (REPRODUCIBLE), move thread count (NONE), random (JDK with seed 0).

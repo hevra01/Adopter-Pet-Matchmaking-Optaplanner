@@ -23,7 +23,7 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 @PlanningEntity
 public class Adopter extends User {
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "planningId", nullable = false, unique = true)
     @PlanningId
     private Long planningId;
 
@@ -93,9 +93,11 @@ public class Adopter extends User {
         return myAnimal;
     }
 
-    public String getMyAnimalUuid() {
-        return myAnimal.getUuid();
-    }
+    /*
+     * public String getMyAnimalUuid() {
+     * return myAnimal.getUuid();
+     * }
+     */
 
     public void setMyAnimal(Animal myAnimal) {
         this.myAnimal = myAnimal;
